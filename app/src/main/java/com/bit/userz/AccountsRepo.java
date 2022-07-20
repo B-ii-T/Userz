@@ -26,7 +26,7 @@ public class AccountsRepo {
     public void delete(Account account){
         new DeleteTask(accountDao).execute(account);
     }
-    public void deleteAll(Account account){
+    public void deleteAll(){
         new DeleteAllTask(accountDao).execute();
     }
     public LiveData<List<Account>> getAllAccounts() {
