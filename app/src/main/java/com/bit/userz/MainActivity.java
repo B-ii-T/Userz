@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(List<Account> accounts) {
                 //updating he recycler view
                 adapter.setAccounts(accounts);
+                Toast.makeText(MainActivity.this, "changed", Toast.LENGTH_SHORT).show();
             }
         });
     }

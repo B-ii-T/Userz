@@ -26,6 +26,7 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountH
         Account currentAccount = accounts.get(position);
         holder.username.setText(currentAccount.getUsername());
         holder.platform.setText(currentAccount.getPlatform());
+        holder.creationDate.setText("creation date");
         holder.appIcon.setImageResource(currentAccount.getIcon());
     }
 
@@ -46,6 +47,7 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountH
             super(itemView);
             username = itemView.findViewById(R.id.username);
             platform = itemView.findViewById(R.id.platform);
+            creationDate = itemView.findViewById(R.id.creation_date);
             appIcon = itemView.findViewById(R.id.app_icon);
         }
     }
