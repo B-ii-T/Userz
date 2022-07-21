@@ -14,6 +14,15 @@ public class Account {
     private String platform;
     private int icon;
 
+    public Account(String username, String email, String password, String category, String platform, int icon) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.category = category;
+        this.platform = platform;
+        this.icon = icon;
+    }
+
     //setters
     public void setId(int id) {
         this.id = id;
