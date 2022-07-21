@@ -9,6 +9,9 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Database(entities = Account.class, version = 1)
 public abstract class AccountsDatabase extends RoomDatabase {
     private static AccountsDatabase instance;
@@ -33,8 +36,9 @@ public abstract class AccountsDatabase extends RoomDatabase {
         private PopulateTask(AccountsDatabase db){accountDao = db.useDao();}
         @Override
         protected Void doInBackground(Void... voids) {
-            accountDao.insert(new Account("BiBo Moh", "bibo@gmail.com", "0000", "social media", "Messenger", R.drawable.messenger));
-            accountDao.insert(new Account("Fatah BNB", "fatah@gmail.com", "0000", "social media", "Messenger", R.drawable.messenger));
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            accountDao.insert(new Account("BiBo Moh", "bibo@gmail.com", "0000", "social media", "Messenger", R.drawable.messenger, sdf.format(new Date())));
+            accountDao.insert(new Account("Fatah BNB", "fatah@gmail.com", "0000", "social media", "Messenger", R.drawable.messenger,  sdf.format(new Date())));
             return null;
         }
     }

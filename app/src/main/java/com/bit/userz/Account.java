@@ -3,6 +3,9 @@ package com.bit.userz;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 @Entity(tableName = "accounts_table")
 public class Account {
     @PrimaryKey(autoGenerate = true)
@@ -13,14 +16,16 @@ public class Account {
     private String category;
     private String platform;
     private int icon;
+    private String timestamp;
 
-    public Account(String username, String email, String password, String category, String platform, int icon) {
+    public Account(String username, String email, String password, String category, String platform, int icon ,String timestamp) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.category = category;
         this.platform = platform;
         this.icon = icon;
+        this.timestamp = timestamp;
     }
 
     //setters
@@ -52,6 +57,10 @@ public class Account {
         this.icon = icon;
     }
 
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
     //getters
     public int getId() {
         return id;
@@ -79,5 +88,9 @@ public class Account {
 
     public int getIcon() {
         return icon;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
     }
 }

@@ -26,7 +26,7 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountH
         Account currentAccount = accounts.get(position);
         holder.username.setText(currentAccount.getUsername());
         holder.platform.setText(currentAccount.getPlatform());
-        holder.creationDate.setText("creation date");
+        holder.creationDate.setText(currentAccount.getTimestamp());
         holder.appIcon.setImageResource(currentAccount.getIcon());
     }
 
