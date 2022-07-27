@@ -38,5 +38,11 @@ public class MainActivity extends AppCompatActivity {
                 adapter.setAccounts(accounts);
             }
         });
+        viewModel.getCatNumber().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                Toast.makeText(MainActivity.this, integer+" category(ies)", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

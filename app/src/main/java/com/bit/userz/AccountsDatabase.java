@@ -39,6 +39,7 @@ public abstract class AccountsDatabase extends RoomDatabase {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             accountDao.insert(new Account("BiBo Moh", "bibo@gmail.com", "0000", "social media", "Messenger", R.drawable.messenger, sdf.format(new Date())));
             accountDao.insert(new Account("Fatah BNB", "fatah@gmail.com", "0000", "social media", "Messenger", R.drawable.messenger,  sdf.format(new Date())));
+            accountDao.insert(new Account("Perfect ANGEL", "bnb.fatah@gmail.com", "0000", "service", "Google", R.drawable.google,  sdf.format(new Date())));
             return null;
         }
     }
