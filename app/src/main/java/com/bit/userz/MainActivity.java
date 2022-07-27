@@ -44,5 +44,13 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, integer+" category(ies)", Toast.LENGTH_SHORT).show();
             }
         });
+        viewModel.getAllCat().observe(this, new Observer<List<String>>() {
+            @Override
+            public void onChanged(List<String> categories) {
+                for (String cat : categories) {
+                    Toast.makeText(MainActivity.this, cat, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }

@@ -11,12 +11,14 @@ public class AccountsRepo {
     private AccountDao accountDao;
     private LiveData<List<Account>> allAccounts;
     private LiveData<Integer> catNumber;
+    private LiveData<List<String>> allCat;
     //constructor
     public AccountsRepo(Application application){
         AccountsDatabase database = AccountsDatabase.getInstance(application);
         accountDao = database.useDao();
         allAccounts = accountDao.getAllAccounts();
         catNumber = accountDao.getCatNumber();
+        allCat = accountDao.getAllCat();
     }
     //API operations
     public void insert(Account account){
@@ -37,6 +39,7 @@ public class AccountsRepo {
     public LiveData<Integer> getCatNumber() {
         return catNumber;
     }
+    public LiveData<List<String>> getAllCat(){return allCat;}
 
     //Async Tasks
     private static class InsertTask extends AsyncTask<Account, Void, Void>{

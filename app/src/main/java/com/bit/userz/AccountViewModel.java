@@ -12,11 +12,13 @@ public class AccountViewModel extends AndroidViewModel {
     private AccountsRepo repository;
     private LiveData<List<Account>> allAccounts;
     private LiveData<Integer> catNumber;
+    private LiveData<List<String>> allCat;
     public AccountViewModel(@NonNull Application application) {
         super(application);
         repository = new AccountsRepo(application);
         allAccounts = repository.getAllAccounts();
         catNumber = repository.getCatNumber();
+        allCat = repository.getAllCat();
     }
     public void insertAccount(Account account){
         repository.insert(account);
@@ -35,5 +37,8 @@ public class AccountViewModel extends AndroidViewModel {
     }
     public LiveData<Integer> getCatNumber() {
         return catNumber;
+    }
+    public LiveData<List<String>> getAllCat() {
+        return allCat;
     }
 }

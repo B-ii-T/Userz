@@ -24,4 +24,6 @@ public interface AccountDao {
     //getting the number of categories
     @Query("SELECT COUNT(DISTINCT category) FROM accounts_table")
     LiveData<Integer> getCatNumber();
+    @Query("SELECT DISTINCT category FROM accounts_table")
+    LiveData<List<String>> getAllCat();
 }
