@@ -10,16 +10,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private AccountViewModel viewModel;
+    private TextView catNumberText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        catNumberText = findViewById(R.id.category_number_text);
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -38,16 +42,14 @@ public class MainActivity extends AppCompatActivity {
         });
         viewModel.getCatNumber().observe(this, new Observer<Integer>() {
             @Override
-            public void onChanged(Integer integer) {
-                Toast.makeText(MainActivity.this, integer+" category(ies)", Toast.LENGTH_SHORT).show();
+            public void onChanged(Integer catNumber) {
+                catNumberText.setText("("+catNumber+")");
             }
         });
         viewModel.getAllCat().observe(this, new Observer<List<String>>() {
             @Override
             public void onChanged(List<String> categories) {
-                for (String cat : categories) {
-                    Toast.makeText(MainActivity.this, cat, Toast.LENGTH_SHORT).show();
-                }
+                // update categories list view
             }
         });
     }

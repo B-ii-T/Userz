@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:minHeight="750dp"
+    android:onClick="switchtomain"
+    tools:context=".MainActivity" >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/fingerprint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/container_top"
+            app:layout_constraintEnd_toEndOf="@+id/container_top"
+            app:layout_constraintHorizontal_bias="0.9"
+            app:layout_constraintStart_toStartOf="@+id/container_top"
+            app:layout_constraintTop_toTopOf="@+id/container_top"
+            app:layout_constraintVertical_bias="0.23000002"
+            app:srcCompat="@drawable/ic_fingerprint_holder_vct" />
+
+        <ImageView
+            android:id="@+id/lock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/container_top"
+            app:layout_constraintEnd_toEndOf="@+id/container_top"
+            app:layout_constraintHorizontal_bias="0.44"
+            app:layout_constraintStart_toStartOf="@+id/container_top"
+            app:layout_constraintTop_toTopOf="@+id/container_top"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/ic_lock_holder_vct" />
+
+        <ImageView
+            android:id="@+id/sheild"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/container_top"
+            app:layout_constraintEnd_toEndOf="@+id/container_top"
+            app:layout_constraintHorizontal_bias="0.03"
+            app:layout_constraintStart_toStartOf="@+id/container_top"
+            app:layout_constraintTop_toTopOf="@+id/container_top"
+            app:layout_constraintVertical_bias="0.32999998"
+            app:srcCompat="@drawable/ic_sheild_holder_vct" />
+
+        <ImageView
+            android:id="@+id/safe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/container_top"
+            app:layout_constraintEnd_toEndOf="@+id/container_top"
+            app:layout_constraintHorizontal_bias="0.23"
+            app:layout_constraintStart_toStartOf="@+id/container_top"
+            app:layout_constraintTop_toTopOf="@+id/container_top"
+            app:layout_constraintVertical_bias="0.95"
+            app:srcCompat="@drawable/ic_safe_holder_vct" />
+
+        <ImageView
+            android:id="@+id/incognito"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/container_top"
+            app:layout_constraintEnd_toEndOf="@+id/container_top"
+            app:layout_constraintHorizontal_bias="0.9"
+            app:layout_constraintStart_toStartOf="@+id/container_top"
+            app:layout_constraintTop_toTopOf="@+id/container_top"
+            app:layout_constraintVertical_bias="0.92"
+            app:srcCompat="@drawable/ic_incognito_holder_vct" />
+
+        <ImageView
+            android:id="@+id/key"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toTopOf="@+id/container_btm"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.701"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/container_top"
+            app:srcCompat="@drawable/ic_key_holder_vct" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container_btm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/certificate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                app:layout_constraintStart_toStartOf="@+id/btm_title"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_certificate_holder_vct" />
+
+            <ImageView
+                android:id="@+id/bg_btm"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/bg_btm_frst" />
+
+            <TextView
+                android:id="@+id/btm_title"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Save your credential safely"
+                android:textColor="@color/white"
+                android:textSize="48sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container_top"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/bg_logo_frst"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_filled_logo_vct" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
