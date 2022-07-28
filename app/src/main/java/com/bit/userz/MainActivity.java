@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -52,5 +53,14 @@ public class MainActivity extends AppCompatActivity {
                 // update categories list view
             }
         });
+    }
+    public void nextSettings (View v){
+    View view = findViewById(R.id.option_bar);
+        view.setVisibility(View.GONE);
+    view = findViewById(R.id.contentmain);
+        view.setVisibility(View.GONE);
+    view = findViewById(R.id.Frst);
+        view.setVisibility(View.VISIBLE);
+
     }
 }

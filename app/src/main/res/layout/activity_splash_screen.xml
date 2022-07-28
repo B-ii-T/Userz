@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     android:minHeight="750dp"
-    android:onClick="switchtomain"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -146,7 +145,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_filled_logo_vct" />
+                app:srcCompat="@drawable/ic_filled_logo_vct"
+                android:onClick="nextActivity"
+                tools:ignore="OnClick"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

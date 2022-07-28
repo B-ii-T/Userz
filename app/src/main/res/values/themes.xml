@@ -12,6 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:switchStyle">@style/in_round_switch</item>
     </style>
 
     <style name="Theme.SmallestViolent.NoActionBar">
@@ -41,5 +42,26 @@
         <item name="layout_constraintEnd_toEndOf">parent</item>
         <item name="layout_constraintStart_toStartOf">parent</item>
         <item name="layout_constraintTop_toTopOf">parent</item>
+    </style>
+
+    <style name="in_round_switch" >
+        <item name="android:thumb">@drawable/bg_switch_thumb</item>
+        <item name="android:track">@drawable/bg_switch_track</item>
+        <item name="android:showText">false</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:clickable">true</item>
+        <item name="android:scaleX">1.35</item>
+        <item name="android:scaleY">1.35</item>
+    </style>
+    <style name="settings_container">
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:paddingLeft">12dp</item>/
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">20dp</item>
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
     </style>
 </resources>
