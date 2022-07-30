@@ -1,5 +1,6 @@
 package com.bit.userz;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
@@ -7,20 +8,26 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    public static final int ADD_ACCOUNT_REQUEST = 1;
     private AccountViewModel viewModel;
     private TextView catNumberText;
-    private List<String> categiriesList = new ArrayList<>();
+    private ImageView addBtn;
+    private List<String> categoriesList = new ArrayList<>();
     private List<Account> accountsByCat = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         catNumberText = findViewById(R.id.category_number_text);
+        addBtn = findViewById(R.id.add_btn);
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -54,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<String> categories) {
                 // update categories list view
-                categiriesList = categories;
+                categoriesList = categories;
             }
         });
         viewModel.getAccountsByCat("service").observe(this, new Observer<List<Account>>() {
@@ -67,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.sort_category_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                for(String s : categiriesList){
+                for(String s : categoriesList){
                     Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
                 }
             }
@@ -79,6 +87,12 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(new Intent(MainActivity.this, AddAccountActivity.class), ADD_ACCOUNT_REQUEST);
+            }
+        });
     }
     public void nextSettings (View v){
     View view = findViewById(R.id.option_bar);
@@ -88,5 +102,24 @@ public class MainActivity extends AppCompatActivity {
     view = findViewById(R.id.Frst);
         view.setVisibility(View.VISIBLE);
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == ADD_ACCOUNT_REQUEST && resultCode == RESULT_OK){
+            String username = data.getStringExtra(AddAccountActivity.EXTRA_USERNAME);
+            String email = data.getStringExtra(AddAccountActivity.EXTRA_EMAIL);
+            String password = data.getStringExtra(AddAccountActivity.EXTRA_PASSWORD);
+            String category = data.getStringExtra(AddAccountActivity.EXTRA_CATEGORY);
+            String platform = data.getStringExtra(AddAccountActivity.EXTRA_PLATFORM);
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Account account = new Account(username, email, password, category, platform, R.drawable.ic_launcher_foreground, sdf.format(new Date()));
+            viewModel.insertAccount(account);
+            Toast.makeText(this, "new account saved", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, "new account not saved", Toast.LENGTH_SHORT).show();
+        }
     }
 }
