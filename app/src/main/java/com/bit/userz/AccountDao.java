@@ -26,4 +26,6 @@ public interface AccountDao {
     LiveData<Integer> getCatNumber();
     @Query("SELECT DISTINCT category FROM accounts_table")
     LiveData<List<String>> getAllCat();
+    @Query("SELECT * FROM accounts_table WHERE category = :cat")
+    LiveData<List<Account>> getAllAccountsByCategory(String cat);
 }

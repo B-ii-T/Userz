@@ -14,11 +14,14 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private AccountViewModel viewModel;
     private TextView catNumberText;
+    private List<String> categiriesList = new ArrayList<>();
+    private List<Account> accountsByCat = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +54,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<String> categories) {
                 // update categories list view
+                categiriesList = categories;
+            }
+        });
+        viewModel.getAccountsByCat("service").observe(this, new Observer<List<Account>>() {
+            @Override
+            public void onChanged(List<Account> accounts) {
+                accountsByCat = accounts;
+            }
+        });
+
+        findViewById(R.id.sort_category_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                for(String s : categiriesList){
+                    Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        findViewById(R.id.sort_category_btn).setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                adapter.setAccounts(accountsByCat);
+                return false;
             }
         });
     }
