@@ -25,7 +25,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     public static final int ADD_ACCOUNT_REQUEST = 1;
     private AccountViewModel viewModel;
-    private TextView catNumberText;
+    private TextView catNumberText, accountsCount;
     private ImageView addBtn;
     private List<String> categoriesList = new ArrayList<>();
     private List<Account> accountsByCat = new ArrayList<>();
@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         catNumberText = findViewById(R.id.category_number_text);
+        accountsCount = findViewById(R.id.accounts_count);
         addBtn = findViewById(R.id.add_btn);
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
@@ -69,6 +70,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<Account> accounts) {
                 accountsByCat = accounts;
+            }
+        });
+        viewModel.getCount().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer count) {
+                accountsCount.setText("("+count+")");
             }
         });
 

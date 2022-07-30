@@ -12,7 +12,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/Accounts_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Accounts"
@@ -21,13 +21,24 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/accounts_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="(accounts)"
+        android:textColor="@color/primary"
+        android:textSize="27sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toEndOf="@id/Accounts_title"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/Accounts_title"
         tools:layout_editor_absoluteX="14dp"
         tools:listitem="@layout/account_sample" />
 

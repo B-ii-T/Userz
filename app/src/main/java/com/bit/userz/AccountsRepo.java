@@ -11,6 +11,7 @@ public class AccountsRepo {
     private AccountDao accountDao;
     private LiveData<List<Account>> allAccounts;
     private LiveData<Integer> catNumber;
+    private LiveData<Integer> count;
     private LiveData<List<String>> allCat;
     private LiveData<List<Account>> accountsByCat;
     //constructor
@@ -20,6 +21,7 @@ public class AccountsRepo {
         allAccounts = accountDao.getAllAccounts();
         catNumber = accountDao.getCatNumber();
         allCat = accountDao.getAllCat();
+        count = accountDao.getCount();
     }
     //API operations
     public void insert(Account account){
@@ -39,6 +41,9 @@ public class AccountsRepo {
     }
     public LiveData<Integer> getCatNumber() {
         return catNumber;
+    }
+    public LiveData<Integer> getCount() {
+        return count;
     }
     public LiveData<List<String>> getAllCat(){return allCat;}
     public LiveData<List<Account>> getAccountsByCat(String cat) {

@@ -21,6 +21,8 @@ public interface AccountDao {
     void deleteAll();
     @Query("SELECT * FROM accounts_table")
     LiveData<List<Account>> getAllAccounts();
+    @Query("SELECT COUNT(*) FROM accounts_table")
+    LiveData<Integer> getCount();
     //getting the number of categories
     @Query("SELECT COUNT(DISTINCT category) FROM accounts_table")
     LiveData<Integer> getCatNumber();
