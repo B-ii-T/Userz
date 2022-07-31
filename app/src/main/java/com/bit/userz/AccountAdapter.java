@@ -40,6 +40,10 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountH
         notifyDataSetChanged();
     }
 
+    public Account getAccountAtPosition(int position){
+        return accounts.get(position);
+    }
+
     class AccountHolder extends RecyclerView.ViewHolder{
         private TextView username, platform, creationDate;
         private ImageView appIcon;
