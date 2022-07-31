@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     android:minHeight="750dp"
-    tools:context=".MainActivity">
+    tools:context=".SplashScreen">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -145,9 +145,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_filled_logo_vct"
                 android:onClick="nextActivity"
-                tools:ignore="OnClick"/>
+                app:srcCompat="@drawable/ic_filled_logo_vct" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
