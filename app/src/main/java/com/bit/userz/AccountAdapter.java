@@ -1,5 +1,6 @@
 package com.bit.userz;
 
+import android.accounts.OnAccountsUpdateListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import java.util.List;
 
 public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountHolder> {
     private List<Account> accounts = new ArrayList<>();
+    private OnAccountClickListener listener;
     @NonNull
     @Override
     public AccountHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -53,6 +55,20 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountH
             platform = itemView.findViewById(R.id.platform);
             creationDate = itemView.findViewById(R.id.creation_date);
             appIcon = itemView.findViewById(R.id.app_icon);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(listener != null && getAdapterPosition() != RecyclerView.NO_POSITION){
+                        listener.onAccountClick(accounts.get(getAdapterPosition()));
+                    }
+                }
+            });
         }
+    }
+    public interface OnAccountClickListener{
+        void onAccountClick(Account account);
+    }
+    public void setOnAccountClickListener(OnAccountClickListener listener){
+        this.listener = listener;
     }
 }

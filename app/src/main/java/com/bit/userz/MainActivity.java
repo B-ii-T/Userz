@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -26,11 +27,13 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     public static final int ADD_ACCOUNT_REQUEST = 1;
+    public static final int EDIT_ACCOUNT_REQUEST = 2;
     private AccountViewModel viewModel;
     private TextView catNumberText, accountsCount;
     private ImageView addBtn;
     private List<String> categoriesList = new ArrayList<>();
     private List<Account> accountsByCat = new ArrayList<>();
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,6 +118,21 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Account deleted", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
+
+        adapter.setOnAccountClickListener(new AccountAdapter.OnAccountClickListener() {
+            @Override
+            public void onAccountClick(Account account) {
+                Intent intent = new Intent(MainActivity.this, EditAccountActivity.class);
+                intent.putExtra(EditAccountActivity.EXTRA_ID, account.getId());
+                intent.putExtra(EditAccountActivity.EXTRA_USERNAME, account.getUsername());
+                intent.putExtra(EditAccountActivity.EXTRA_EMAIL, account.getEmail());
+                intent.putExtra(EditAccountActivity.EXTRA_PASSWORD, account.getPassword());
+                intent.putExtra(AddAccountActivity.EXTRA_CATEGORY, account.getCategory());
+                intent.putExtra(AddAccountActivity.EXTRA_PLATFORM, account.getPlatform());
+                intent.putExtra(EditAccountActivity.EXTRA_ICON, account.getIcon());
+                startActivityForResult(intent, EDIT_ACCOUNT_REQUEST);
+            }
+        });
     }
     public void nextSettings (View v){
     View view = findViewById(R.id.option_bar);
@@ -136,12 +154,27 @@ public class MainActivity extends AppCompatActivity {
             String category = data.getStringExtra(AddAccountActivity.EXTRA_CATEGORY);
             String platform = data.getStringExtra(AddAccountActivity.EXTRA_PLATFORM);
 
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             Account account = new Account(username, email, password, category, platform, R.drawable.ic_launcher_foreground, sdf.format(new Date()));
             viewModel.insertAccount(account);
             Toast.makeText(this, "new account saved", Toast.LENGTH_SHORT).show();
-        }else{
-            Toast.makeText(this, "new account not saved", Toast.LENGTH_SHORT).show();
+        } else if(requestCode == EDIT_ACCOUNT_REQUEST && resultCode == RESULT_OK){
+            int accountId = data.getIntExtra(EditAccountActivity.EXTRA_ID, -1);
+            String username = data.getStringExtra(EditAccountActivity.EXTRA_USERNAME);
+            String email = data.getStringExtra(EditAccountActivity.EXTRA_EMAIL);
+            String password = data.getStringExtra(EditAccountActivity.EXTRA_PASSWORD);
+            String category = data.getStringExtra(AddAccountActivity.EXTRA_CATEGORY);
+            String platform = data.getStringExtra(AddAccountActivity.EXTRA_PLATFORM);
+            int icon = data.getIntExtra(EditAccountActivity.EXTRA_ICON, R.drawable.ic_launcher_foreground);
+            if(accountId == -1){
+                Toast.makeText(this, "can't update account", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            Account account = new Account(username, email, password, category, platform, icon, sdf.format(new Date()));
+            account.setId(accountId);
+            viewModel.updateAccount(account);
+            Toast.makeText(this, "account updated", Toast.LENGTH_SHORT).show();
+        } else{
+//            Toast.makeText(this, "new account not saved", Toast.LENGTH_SHORT).show();
         }
     }
 }
