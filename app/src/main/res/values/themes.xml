@@ -64,4 +64,15 @@
         <item name="layout_constraintEnd_toEndOf">parent</item>
         <item name="layout_constraintStart_toStartOf">parent</item>
     </style>
+    <style name="section_container">
+        <item name="android:background">@drawable/bg_shape</item>
+    </style>
+    <style name="section_title">
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:textSize">28sp</item>
+    </style>
+    <style name="input_text">
+        <item name="android:background">@drawable/bg_shape</item>
+        <item name="android:layout_height">40dp</item>
+    </style>
 </resources>
