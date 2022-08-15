@@ -66,13 +66,17 @@
     </style>
     <style name="section_container">
         <item name="android:background">@drawable/bg_shape</item>
+        <item name="android:padding">12dp</item>
     </style>
     <style name="section_title">
         <item name="android:textColor">@color/primary</item>
         <item name="android:textSize">28sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
     <style name="input_text">
         <item name="android:background">@drawable/bg_shape</item>
         <item name="android:layout_height">40dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
     </style>
 </resources>
