@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 public class EditAccountActivity extends AppCompatActivity {
@@ -16,7 +18,8 @@ public class EditAccountActivity extends AppCompatActivity {
     public static final String EXTRA_PASSWORD = "PASSWORD";
     public static final String EXTRA_ICON = "ICON";
     private EditText usernameEdit, emailEdit, passwordEdit, categoryEdit, platformEdit;
-    private Button saveEditBtn, editModeBtn;
+    private Button saveEditBtn;
+    private Switch editModeSwitch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,14 +32,20 @@ public class EditAccountActivity extends AppCompatActivity {
         categoryEdit = findViewById(R.id.category_edit_input);
         platformEdit = findViewById(R.id.platform_edit_input);
         saveEditBtn = findViewById(R.id.save_edit_btn);
-        editModeBtn = findViewById(R.id.edit_mode_btn);
+        editModeSwitch = findViewById(R.id.edit_mode_switch);
 
-        editModeBtn.setOnClickListener(new View.OnClickListener() {
+        editModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View view) {
-                usernameEdit.setEnabled(true);
-                emailEdit.setEnabled(true);
-                passwordEdit.setEnabled(true);
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b){
+                    usernameEdit.setEnabled(true);
+                    emailEdit.setEnabled(true);
+                    passwordEdit.setEnabled(true);
+                }else{
+                    usernameEdit.setEnabled(false);
+                    emailEdit.setEnabled(false);
+                    passwordEdit.setEnabled(false);
+                }
             }
         });
 
