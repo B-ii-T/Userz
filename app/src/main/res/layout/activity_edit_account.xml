@@ -4,67 +4,132 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     android:orientation="vertical"
     tools:context=".EditAccountActivity">
 
-    <Switch
-        android:id="@+id/edit_mode_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Edit mode"/>
-
-    <EditText
-        android:enabled="false"
-        android:id="@+id/username_edit_input"
+    <LinearLayout
+        style="@style/section_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="25dp"
-        android:hint="Username"
-        android:inputType="text"/>
+        android:orientation="vertical">
 
-    <EditText
-        android:enabled="false"
-        android:id="@+id/email_edit_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Email"
-        android:layout_margin="25dp"
-        android:inputType="text"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <EditText
-        android:enabled="false"
-        android:id="@+id/password_edit_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Password"
-        android:layout_margin="25dp"
-        android:inputType="textPassword"/>
+            <TextView
+                android:id="@+id/textView8"
+                style="@style/section_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Account"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:enabled="false"
-        android:id="@+id/category_edit_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Category"
-        android:layout_margin="25dp"
-        android:inputType="text"/>
+            <Switch
+                android:id="@+id/edit_mode_switch"
+                style="@style/in_round_text_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textOff="View"
+                android:textOn="Edit"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <EditText
-        android:enabled="false"
-        android:id="@+id/platform_edit_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Platform"
-        android:layout_margin="25dp"
-        android:inputType="text"/>
+        <View
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/bg_shape"
+            android:backgroundTint="@color/white" />
+
+        <TextView
+            android:id="@+id/textView9"
+            style="@style/input_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Username" />
+
+        <EditText
+            android:id="@+id/category_edit_input"
+            style="@style/input_text"
+            android:layout_width="match_parent"
+            android:enabled="false"
+            android:inputType="text"/>
+
+        <TextView
+            android:id="@+id/textView10"
+            style="@style/input_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email" />
+
+        <EditText
+            android:id="@+id/password_edit_input"
+            style="@style/input_text"
+            android:layout_width="match_parent"
+            android:enabled="false"
+            android:inputType="textPassword" />
+
+        <TextView
+            android:id="@+id/textView11"
+            style="@style/input_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Password" />
+
+        <EditText
+            android:id="@+id/platform_edit_input"
+            style="@style/input_text"
+            android:layout_width="match_parent"
+            android:enabled="false"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/textView12"
+            style="@style/input_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Category" />
+
+        <EditText
+            android:id="@+id/username_edit_input"
+            style="@style/input_text"
+            android:layout_width="match_parent"
+            android:enabled="false"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/textView13"
+            style="@style/input_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Platform" />
+
+        <EditText
+            android:id="@+id/email_edit_input"
+            style="@style/input_text"
+            android:layout_width="match_parent"
+            android:enabled="false"
+            android:inputType="text" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/save_edit_btn"
-        android:layout_width="200dp"
-        android:layout_height="100dp"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
-        android:text="save"/>
+        android:backgroundTint="@color/primary"
+        android:text="save"
+        android:background="@drawable/bg_shape"
+        android:textColor="@color/white""/>
 
 
 </LinearLayout>

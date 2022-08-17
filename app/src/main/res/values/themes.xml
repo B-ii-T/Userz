@@ -53,6 +53,12 @@
         <item name="android:clickable">true</item>
         <item name="android:scaleX">1.35</item>
         <item name="android:scaleY">1.35</item>
+    </style><style name="in_round_text_switch" >
+        <item name="android:thumb">@drawable/bg_switch_text_thumb</item>
+        <item name="android:track">@drawable/bg_switch_text</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:clickable">true</item>
     </style>
     <style name="settings_container">
         <item name="android:layout_marginBottom">16dp</item>
@@ -67,6 +73,7 @@
     <style name="section_container">
         <item name="android:background">@drawable/bg_shape</item>
         <item name="android:padding">12dp</item>
+        <item name="android:layout_margin">14dp</item>
     </style>
     <style name="section_title">
         <item name="android:textColor">@color/primary</item>
@@ -78,5 +85,12 @@
         <item name="android:layout_height">40dp</item>
         <item name="android:layout_marginTop">10dp</item>
         <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:textColor">#BFBFBF</item>
+        <item name="paddingStart">12dp</item>
+        <item name="paddingEnd">12dp</item>
+    </style>
+    <style name="input_title">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">17sp</item>
     </style>
 </resources>
