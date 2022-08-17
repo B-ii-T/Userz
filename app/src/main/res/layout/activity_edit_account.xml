@@ -129,7 +129,7 @@
         android:backgroundTint="@color/primary"
         android:text="save"
         android:background="@drawable/bg_shape"
-        android:textColor="@color/white""/>
+        android:textColor="@color/white"/>
 
 
 </LinearLayout>
