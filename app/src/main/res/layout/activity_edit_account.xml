@@ -57,7 +57,7 @@
             android:text="Username" />
 
         <EditText
-            android:id="@+id/category_edit_input"
+            android:id="@+id/username_edit_input"
             style="@style/input_text"
             android:layout_width="match_parent"
             android:enabled="false"
@@ -71,11 +71,11 @@
             android:text="Email" />
 
         <EditText
-            android:id="@+id/password_edit_input"
+            android:id="@+id/email_edit_input"
             style="@style/input_text"
             android:layout_width="match_parent"
             android:enabled="false"
-            android:inputType="textPassword" />
+            android:inputType="textEmailAddress" />
 
         <TextView
             android:id="@+id/textView11"
@@ -85,11 +85,11 @@
             android:text="Password" />
 
         <EditText
-            android:id="@+id/platform_edit_input"
+            android:id="@+id/password_edit_input"
             style="@style/input_text"
             android:layout_width="match_parent"
             android:enabled="false"
-            android:inputType="text" />
+            android:inputType="textPassword" />
 
         <TextView
             android:id="@+id/textView12"
@@ -99,7 +99,7 @@
             android:text="Category" />
 
         <EditText
-            android:id="@+id/username_edit_input"
+            android:id="@+id/category_edit_input"
             style="@style/input_text"
             android:layout_width="match_parent"
             android:enabled="false"
@@ -113,7 +113,7 @@
             android:text="Platform" />
 
         <EditText
-            android:id="@+id/email_edit_input"
+            android:id="@+id/platform_edit_input"
             style="@style/input_text"
             android:layout_width="match_parent"
             android:enabled="false"
@@ -121,15 +121,37 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/save_edit_btn"
-        android:layout_width="180dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:backgroundTint="@color/primary"
-        android:text="save"
-        android:background="@drawable/bg_shape"
-        android:textColor="@color/white"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/save_edit_btn"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="15dp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/primary"
+            android:text="save"
+            android:background="@drawable/bg_shape"
+            android:textColor="@color/white"/>
+
+        <Button
+            android:id="@+id/copy_btn"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/primary"
+            android:text="copy"
+            android:background="@drawable/bg_shape"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+
 
 
 </LinearLayout>
