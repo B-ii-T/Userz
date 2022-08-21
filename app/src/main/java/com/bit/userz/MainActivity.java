@@ -152,9 +152,9 @@ public class MainActivity extends AppCompatActivity {
             String email = data.getStringExtra(AddAccountActivity.EXTRA_EMAIL);
             String password = data.getStringExtra(AddAccountActivity.EXTRA_PASSWORD);
             String category = data.getStringExtra(AddAccountActivity.EXTRA_CATEGORY);
-            String platform = data.getStringExtra(AddAccountActivity.EXTRA_PLATFORM);
+            String platform = data.getStringExtra(AddAccountActivity.EXTRA_PLATFORM).substring(0,1).toUpperCase()+data.getStringExtra(AddAccountActivity.EXTRA_PLATFORM).substring(1);
 
-            Account account = new Account(username, email, password, category, platform, R.drawable.ic_launcher_foreground, sdf.format(new Date()));
+            Account account = new Account(username, email, password, category, platform, fillIcon(platform), sdf.format(new Date()));
             viewModel.insertAccount(account);
             Toast.makeText(this, "new account saved", Toast.LENGTH_SHORT).show();
         } else if(requestCode == EDIT_ACCOUNT_REQUEST && resultCode == RESULT_OK){
@@ -175,6 +175,15 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "account updated", Toast.LENGTH_SHORT).show();
         } else{
 //            Toast.makeText(this, "new account not saved", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public int fillIcon(String platform){
+        switch (platform.toLowerCase()){
+            case "messenger" : return R.drawable.messenger;
+            case "twitter" : return R.drawable.twitter;
+            case "google" : return R.drawable.google;
+            default : return R.drawable.user;
         }
     }
 }
