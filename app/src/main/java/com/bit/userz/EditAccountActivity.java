@@ -2,7 +2,11 @@ package com.bit.userz;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,13 +16,14 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 public class EditAccountActivity extends AppCompatActivity {
+    private boolean enabled;
     public static final String EXTRA_ID = "ID";
     public static final String EXTRA_USERNAME = "USERNAME";
     public static final String EXTRA_EMAIL = "EMAIL";
     public static final String EXTRA_PASSWORD = "PASSWORD";
     public static final String EXTRA_ICON = "ICON";
     private EditText usernameEdit, emailEdit, passwordEdit, categoryEdit, platformEdit;
-    private Button saveEditBtn;
+    private Button saveEditBtn, copyBtn;
     private Switch editModeSwitch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +37,26 @@ public class EditAccountActivity extends AppCompatActivity {
         categoryEdit = findViewById(R.id.category_edit_input);
         platformEdit = findViewById(R.id.platform_edit_input);
         saveEditBtn = findViewById(R.id.save_edit_btn);
+        copyBtn = findViewById(R.id.copy_btn);
         editModeSwitch = findViewById(R.id.edit_mode_switch);
+
+        copyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!usernameEdit.getText().toString().trim().equals("") &&
+                !emailEdit.getText().toString().trim().equals("") &&
+                !passwordEdit.getText().toString().trim().equals("")){
+                    ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData passwordClip = ClipData.newPlainText("password", passwordEdit.getText().toString().trim());
+                    ClipData emailClip = ClipData.newPlainText("email", emailEdit.getText().toString().trim());
+                    ClipData usernameClip = ClipData.newPlainText("username", usernameEdit.getText().toString().trim());
+                    clipboard.setPrimaryClip(passwordClip);
+                    clipboard.setPrimaryClip(emailClip);
+                    clipboard.setPrimaryClip(usernameClip);
+                    Toast.makeText(EditAccountActivity.this, "credentials copied", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         editModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -41,10 +65,12 @@ public class EditAccountActivity extends AppCompatActivity {
                     usernameEdit.setEnabled(true);
                     emailEdit.setEnabled(true);
                     passwordEdit.setEnabled(true);
+                    enabled = true;
                 }else{
                     usernameEdit.setEnabled(false);
                     emailEdit.setEnabled(false);
                     passwordEdit.setEnabled(false);
+                    enabled = false;
                 }
             }
         });
@@ -64,6 +90,46 @@ public class EditAccountActivity extends AppCompatActivity {
                 saveEdits();
             }
         });
+
+        usernameEdit.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if(usernameEdit.isEnabled() && !usernameEdit.getText().toString().trim().equals("")){
+                    ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData usernameClip = ClipData.newPlainText("username", usernameEdit.getText().toString().trim());
+                    clipboard.setPrimaryClip(usernameClip);
+                    Toast.makeText(EditAccountActivity.this, "username copied", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+        });
+
+        emailEdit.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if(emailEdit.isEnabled() && !emailEdit.getText().toString().trim().equals("")){
+                    ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData usernameClip = ClipData.newPlainText("email", emailEdit.getText().toString().trim());
+                    clipboard.setPrimaryClip(usernameClip);
+                    Toast.makeText(EditAccountActivity.this, "email copied", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+        });
+
+        passwordEdit.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if(passwordEdit.isEnabled() && !passwordEdit.getText().toString().trim().equals("")){
+                    ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData usernameClip = ClipData.newPlainText("password", passwordEdit.getText().toString().trim());
+                    clipboard.setPrimaryClip(usernameClip);
+                    Toast.makeText(EditAccountActivity.this, "password copied", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+        });
+
     }
     public void saveEdits(){
         String userName = usernameEdit.getText().toString().trim();
