@@ -23,8 +23,8 @@
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="6dp"
         android:text="TextView"
         android:textColor="@color/white"
         android:textSize="17sp"
@@ -35,11 +35,12 @@
         android:id="@+id/platform"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="2dp"
         android:text="TextView"
         android:textColor="@color/secondary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/username" />
+        app:layout_constraintBottom_toBottomOf="@+id/creation_date"
+        app:layout_constraintStart_toStartOf="@+id/username"
+        app:layout_constraintTop_toBottomOf="@+id/username" />
 
     <TextView
         android:id="@+id/creation_date"
