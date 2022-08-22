@@ -16,7 +16,6 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 public class EditAccountActivity extends AppCompatActivity {
-    private boolean enabled;
     public static final String EXTRA_ID = "ID";
     public static final String EXTRA_USERNAME = "USERNAME";
     public static final String EXTRA_EMAIL = "EMAIL";
@@ -65,12 +64,10 @@ public class EditAccountActivity extends AppCompatActivity {
                     usernameEdit.setEnabled(true);
                     emailEdit.setEnabled(true);
                     passwordEdit.setEnabled(true);
-                    enabled = true;
                 }else{
                     usernameEdit.setEnabled(false);
                     emailEdit.setEnabled(false);
                     passwordEdit.setEnabled(false);
-                    enabled = false;
                 }
             }
         });

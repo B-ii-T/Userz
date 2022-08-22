@@ -25,12 +25,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import maes.tech.intentanim.CustomIntent;
+
 public class MainActivity extends AppCompatActivity {
     public static final int ADD_ACCOUNT_REQUEST = 1;
     public static final int EDIT_ACCOUNT_REQUEST = 2;
     private AccountViewModel viewModel;
     private TextView catNumberText, accountsCount;
-    private ImageView addBtn;
+    private ImageView addBtn, optionsBtn;
     private List<String> categoriesList = new ArrayList<>();
     private List<Account> accountsByCat = new ArrayList<>();
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         catNumberText = findViewById(R.id.category_number_text);
         accountsCount = findViewById(R.id.accounts_count);
         addBtn = findViewById(R.id.add_btn);
+        optionsBtn = findViewById(R.id.options_btn);
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -131,6 +134,14 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(AddAccountActivity.EXTRA_PLATFORM, account.getPlatform());
                 intent.putExtra(EditAccountActivity.EXTRA_ICON, account.getIcon());
                 startActivityForResult(intent, EDIT_ACCOUNT_REQUEST);
+            }
+        });
+
+        optionsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                CustomIntent.customType(MainActivity.this, "left-to-right");
             }
         });
     }
