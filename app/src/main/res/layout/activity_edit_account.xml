@@ -56,70 +56,90 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Username" />
-
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/username_edit_text_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:endIconMode="clear_text">
         <EditText
             android:id="@+id/username_edit_input"
             style="@style/input_text"
             android:layout_width="match_parent"
             android:enabled="false"
             android:inputType="text"/>
-
+        </com.google.android.material.textfield.TextInputLayout>
         <TextView
             android:id="@+id/textView10"
             style="@style/input_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Email" />
-
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email_edit_text_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:endIconMode="clear_text">
         <EditText
             android:id="@+id/email_edit_input"
             style="@style/input_text"
             android:layout_width="match_parent"
             android:enabled="false"
             android:inputType="textEmailAddress" />
-
+        </com.google.android.material.textfield.TextInputLayout>
         <TextView
             android:id="@+id/textView11"
             style="@style/input_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Password" />
-
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password_edit_text_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true">
         <EditText
             android:id="@+id/password_edit_input"
             style="@style/input_text"
             android:layout_width="match_parent"
             android:enabled="false"
             android:inputType="textPassword" />
-
+        </com.google.android.material.textfield.TextInputLayout>
         <TextView
             android:id="@+id/textView12"
             style="@style/input_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Category" />
-
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/category_edit_text_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:endIconMode="clear_text">
         <EditText
             android:id="@+id/category_edit_input"
             style="@style/input_text"
             android:layout_width="match_parent"
             android:enabled="false"
             android:inputType="text" />
-
+        </com.google.android.material.textfield.TextInputLayout>
         <TextView
             android:id="@+id/textView13"
             style="@style/input_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Platform" />
-
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/platform_edit_text_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:endIconMode="clear_text">
         <EditText
             android:id="@+id/platform_edit_input"
             style="@style/input_text"
             android:layout_width="match_parent"
             android:enabled="false"
             android:inputType="text" />
-
+        </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
     <LinearLayout

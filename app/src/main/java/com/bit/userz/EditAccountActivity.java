@@ -1,6 +1,10 @@
 package com.bit.userz;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.biometric.BiometricManager;
+import androidx.biometric.BiometricPrompt;
+import androidx.core.content.ContextCompat;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -14,6 +18,8 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 public class EditAccountActivity extends AppCompatActivity {
     public static final String EXTRA_ID = "ID";
@@ -126,6 +132,9 @@ public class EditAccountActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+
+
 
     }
     public void saveEdits(){
