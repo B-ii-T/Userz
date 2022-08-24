@@ -190,15 +190,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public int fillIcon(String platform){
-        switch (platform.toLowerCase()){
-            case "messenger" : return R.drawable.messenger;
-            case "twitter" : return R.drawable.twitter;
-            case "google" : return R.drawable.google;
-            case "instagram" : return R.drawable.instagram;
-            case "microsoft" : return R.drawable.microsoft;
-            case "facebook" : return R.drawable.facebook;
-            case "tiktok" : return R.drawable.tiktok;
-            default : return R.drawable.user;
+        int icon = R.drawable.user;
+        for(PlatformSuggestion ps : AddAccountActivity.platformSuggestions){
+            if(platform.toLowerCase().trim().equals(ps.getPlatformName())){
+                icon =  ps.getPlatformImg();
+                return icon;
+            }
         }
+        return icon;
     }
 }

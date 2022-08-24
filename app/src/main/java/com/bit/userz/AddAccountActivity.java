@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddAccountActivity extends AppCompatActivity {
-    private List<PlatformSuggestion> platformSuggestions;
+    public static List<PlatformSuggestion> platformSuggestions;
 
     public static final String EXTRA_USERNAME = "USERNAME";
     public static final String EXTRA_EMAIL = "EMAIL";
@@ -29,6 +29,8 @@ public class AddAccountActivity extends AppCompatActivity {
     private AutoCompleteTextView platform;
     private ImageView platformImage;
     private Button saveBtn;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +80,7 @@ public class AddAccountActivity extends AppCompatActivity {
                 saveAccount();
             }
         });
+
     }
     public void saveAccount(){
         String userName = username.getText().toString().trim();
@@ -109,5 +112,11 @@ public class AddAccountActivity extends AppCompatActivity {
         platformSuggestions.add(new PlatformSuggestion("tiktok", R.drawable.tiktok));
         platformSuggestions.add(new PlatformSuggestion("microsoft", R.drawable.microsoft));
         platformSuggestions.add(new PlatformSuggestion("google", R.drawable.google));
+        platformSuggestions.add(new PlatformSuggestion("viber", R.drawable.viber));
+        platformSuggestions.add(new PlatformSuggestion("telegram", R.drawable.telegram));
+        platformSuggestions.add(new PlatformSuggestion("reddit", R.drawable.reddit));
+        platformSuggestions.add(new PlatformSuggestion("snapchat", R.drawable.snapchat));
+        platformSuggestions.add(new PlatformSuggestion("pinterest", R.drawable.pinterest));
+        platformSuggestions.add(new PlatformSuggestion("linkedin", R.drawable.linkedin));
     }
 }
