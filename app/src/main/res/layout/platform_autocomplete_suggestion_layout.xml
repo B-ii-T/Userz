@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:background="@drawable/bg_shape"
+    android:paddingStart="10dp"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/suggested_platform_img"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        tool:src="@drawable/user"
+        android:layout_margin="10dp"/>
+
+    <TextView
+        android:id="@+id/suggested_platform_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_gravity="center_vertical"
+        android:text="Platform Name"
+        android:textColor="@color/white"
+        android:textSize="16sp"/>
+
+</LinearLayout>

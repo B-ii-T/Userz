@@ -4,30 +4,73 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AddAccountActivity extends AppCompatActivity {
+    private List<PlatformSuggestion> platformSuggestions;
+
     public static final String EXTRA_USERNAME = "USERNAME";
     public static final String EXTRA_EMAIL = "EMAIL";
     public static final String EXTRA_PASSWORD = "PASSWORD";
     public static final String EXTRA_CATEGORY = "CATEGORY";
     public static final String EXTRA_PLATFORM = "PLATFORM";
-    private EditText username, email, password, category, platform;
+    private EditText username, email, password, category;
+    private AutoCompleteTextView platform;
+    private ImageView platformImage;
     private Button saveBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_account);
+        fillPlatformList();
+        platform = findViewById(R.id.platform_input);
+        PlatformAdapter platformAdapter = new PlatformAdapter(this, platformSuggestions);
+        platform.setAdapter(platformAdapter);
 
         username = findViewById(R.id.username_input);
         email = findViewById(R.id.email_input);
         password = findViewById(R.id.password_input);
         category = findViewById(R.id.category_input);
-        platform = findViewById(R.id.platform_input);
+        platformImage = findViewById(R.id.platform_img);
         saveBtn = findViewById(R.id.save_btn);
+
+        platform.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                PlatformSuggestion platformSuggestion = platformAdapter.getItem(i);
+                platformImage.setImageResource(platformSuggestion.getPlatformImg());
+            }
+        });
+        TextWatcher textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                for(PlatformSuggestion ps : platformSuggestions){
+                    if(editable.toString().toLowerCase().trim().equals(ps.getPlatformName())){
+                        platformImage.setImageResource(ps.getPlatformImg());
+                    }else{
+                        platformImage.setImageResource(R.drawable.user);
+                    }
+                }
+            }
+        };
+        platform.addTextChangedListener(textWatcher);
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,5 +98,16 @@ public class AddAccountActivity extends AppCompatActivity {
 
         setResult(RESULT_OK, newAccountData);
         finish();
+    }
+
+    private void fillPlatformList(){
+        platformSuggestions = new ArrayList<>();
+        platformSuggestions.add(new PlatformSuggestion("messenger", R.drawable.messenger));
+        platformSuggestions.add(new PlatformSuggestion("facebook", R.drawable.facebook));
+        platformSuggestions.add(new PlatformSuggestion("twitter", R.drawable.twitter));
+        platformSuggestions.add(new PlatformSuggestion("instagram", R.drawable.instagram));
+        platformSuggestions.add(new PlatformSuggestion("tiktok", R.drawable.tiktok));
+        platformSuggestions.add(new PlatformSuggestion("microsoft", R.drawable.microsoft));
+        platformSuggestions.add(new PlatformSuggestion("google", R.drawable.google));
     }
 }
