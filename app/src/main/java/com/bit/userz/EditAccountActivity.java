@@ -48,17 +48,14 @@ public class EditAccountActivity extends AppCompatActivity {
         copyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!usernameEdit.getText().toString().trim().equals("") &&
-                !emailEdit.getText().toString().trim().equals("") &&
-                !passwordEdit.getText().toString().trim().equals("")){
-                    ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                    ClipData passwordClip = ClipData.newPlainText("password", passwordEdit.getText().toString().trim());
-                    ClipData emailClip = ClipData.newPlainText("email", emailEdit.getText().toString().trim());
-                    ClipData usernameClip = ClipData.newPlainText("username", usernameEdit.getText().toString().trim());
-                    clipboard.setPrimaryClip(passwordClip);
-                    clipboard.setPrimaryClip(emailClip);
-                    clipboard.setPrimaryClip(usernameClip);
-                    Toast.makeText(EditAccountActivity.this, "credentials copied", Toast.LENGTH_SHORT).show();
+                if(!emailEdit.getText().toString().trim().equals("") &&
+                    !passwordEdit.getText().toString().trim().equals("")){
+                        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                        ClipData passwordClip = ClipData.newPlainText("password", passwordEdit.getText().toString().trim());
+                        ClipData emailClip = ClipData.newPlainText("email", emailEdit.getText().toString().trim());
+                        clipboard.setPrimaryClip(passwordClip);
+                        clipboard.setPrimaryClip(emailClip);
+                        Toast.makeText(EditAccountActivity.this, "credentials copied", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -91,45 +88,6 @@ public class EditAccountActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 saveEdits();
-            }
-        });
-
-        usernameEdit.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                if(usernameEdit.isEnabled() && !usernameEdit.getText().toString().trim().equals("")){
-                    ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                    ClipData usernameClip = ClipData.newPlainText("username", usernameEdit.getText().toString().trim());
-                    clipboard.setPrimaryClip(usernameClip);
-                    Toast.makeText(EditAccountActivity.this, "username copied", Toast.LENGTH_SHORT).show();
-                }
-                return true;
-            }
-        });
-
-        emailEdit.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                if(emailEdit.isEnabled() && !emailEdit.getText().toString().trim().equals("")){
-                    ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                    ClipData usernameClip = ClipData.newPlainText("email", emailEdit.getText().toString().trim());
-                    clipboard.setPrimaryClip(usernameClip);
-                    Toast.makeText(EditAccountActivity.this, "email copied", Toast.LENGTH_SHORT).show();
-                }
-                return true;
-            }
-        });
-
-        passwordEdit.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                if(passwordEdit.isEnabled() && !passwordEdit.getText().toString().trim().equals("")){
-                    ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                    ClipData usernameClip = ClipData.newPlainText("password", passwordEdit.getText().toString().trim());
-                    clipboard.setPrimaryClip(usernameClip);
-                    Toast.makeText(EditAccountActivity.this, "password copied", Toast.LENGTH_SHORT).show();
-                }
-                return true;
             }
         });
 
