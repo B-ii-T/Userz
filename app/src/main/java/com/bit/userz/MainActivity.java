@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -28,6 +29,9 @@ import java.util.List;
 import maes.tech.intentanim.CustomIntent;
 
 public class MainActivity extends AppCompatActivity {
+    SharedPreferences sh;
+    private static final int TIME_DELAY = 2000;
+    private static long back_pressed;
     public static final int ADD_ACCOUNT_REQUEST = 1;
     public static final int EDIT_ACCOUNT_REQUEST = 2;
     private AccountViewModel viewModel;
@@ -40,11 +44,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        sh = getSharedPreferences("settingsPreferences", MODE_PRIVATE);
         catNumberText = findViewById(R.id.category_number_text);
         accountsCount = findViewById(R.id.accounts_count);
         addBtn = findViewById(R.id.add_btn);
         optionsBtn = findViewById(R.id.options_btn);
+        SharedPreferences sh = getSharedPreferences("settingsPreferences", MODE_PRIVATE);
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -198,5 +203,19 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return icon;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(sh.getBoolean("doubleTapOption", false)){
+            if(back_pressed + TIME_DELAY > System.currentTimeMillis()){
+                super.onBackPressed();
+            }else{
+                Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
+            }
+            back_pressed = System.currentTimeMillis();
+        }else{
+            super.onBackPressed();
+        }
     }
 }

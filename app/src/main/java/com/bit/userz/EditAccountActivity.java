@@ -10,6 +10,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -35,6 +36,7 @@ public class EditAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_account);
 
+        SharedPreferences sh = getSharedPreferences("settingsPreferences", MODE_PRIVATE);
 
         usernameEdit = findViewById(R.id.username_edit_input);
         emailEdit = findViewById(R.id.email_edit_input);
@@ -44,6 +46,8 @@ public class EditAccountActivity extends AppCompatActivity {
         saveEditBtn = findViewById(R.id.save_edit_btn);
         copyBtn = findViewById(R.id.copy_btn);
         editModeSwitch = findViewById(R.id.edit_mode_switch);
+
+        copyBtn.setEnabled(sh.getBoolean("copyOption", false));
 
         copyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
