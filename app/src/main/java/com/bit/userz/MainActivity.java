@@ -43,8 +43,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         sh = getSharedPreferences("settingsPreferences", MODE_PRIVATE);
+        checkActionBar(sh);
+        setContentView(R.layout.activity_main);
         catNumberText = findViewById(R.id.category_number_text);
         accountsCount = findViewById(R.id.accounts_count);
         addBtn = findViewById(R.id.add_btn);
@@ -217,5 +218,24 @@ public class MainActivity extends AppCompatActivity {
         }else{
             super.onBackPressed();
         }
+    }
+    public void checkActionBar(SharedPreferences sh){
+        if(!sh.getBoolean("actionBarOption", false)){
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }else{
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkActionBar(sh);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        checkActionBar(sh);
     }
 }

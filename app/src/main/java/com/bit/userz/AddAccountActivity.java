@@ -3,10 +3,12 @@ package com.bit.userz;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -18,8 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddAccountActivity extends AppCompatActivity {
+    SharedPreferences sh;
     public static List<PlatformSuggestion> platformSuggestions;
-
     public static final String EXTRA_USERNAME = "USERNAME";
     public static final String EXTRA_EMAIL = "EMAIL";
     public static final String EXTRA_PASSWORD = "PASSWORD";
@@ -34,6 +36,8 @@ public class AddAccountActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sh = getSharedPreferences("settingsPreferences", MODE_PRIVATE);
+        checkActionBar(sh);
         setContentView(R.layout.activity_add_account);
         fillPlatformList();
         platform = findViewById(R.id.platform_input);
@@ -118,5 +122,12 @@ public class AddAccountActivity extends AppCompatActivity {
         platformSuggestions.add(new PlatformSuggestion("snapchat", R.drawable.snapchat));
         platformSuggestions.add(new PlatformSuggestion("pinterest", R.drawable.pinterest));
         platformSuggestions.add(new PlatformSuggestion("linkedin", R.drawable.linkedin));
+    }
+    public void checkActionBar(SharedPreferences sh){
+        if(!sh.getBoolean("actionBarOption", false)){
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }else{
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }
     }
 }

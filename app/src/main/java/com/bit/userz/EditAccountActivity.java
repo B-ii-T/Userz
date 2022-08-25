@@ -14,6 +14,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -31,12 +32,13 @@ public class EditAccountActivity extends AppCompatActivity {
     private EditText usernameEdit, emailEdit, passwordEdit, categoryEdit, platformEdit;
     private Button saveEditBtn, copyBtn;
     private Switch editModeSwitch;
+    SharedPreferences sh;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sh = getSharedPreferences("settingsPreferences", MODE_PRIVATE);
+        checkActionBar(sh);
         setContentView(R.layout.activity_edit_account);
-
-        SharedPreferences sh = getSharedPreferences("settingsPreferences", MODE_PRIVATE);
 
         usernameEdit = findViewById(R.id.username_edit_input);
         emailEdit = findViewById(R.id.email_edit_input);
@@ -47,7 +49,11 @@ public class EditAccountActivity extends AppCompatActivity {
         copyBtn = findViewById(R.id.copy_btn);
         editModeSwitch = findViewById(R.id.edit_mode_switch);
 
-        copyBtn.setEnabled(sh.getBoolean("copyOption", false));
+        if(sh.getBoolean("copyOption", false)){
+            copyBtn.setVisibility(View.VISIBLE);
+        }else{
+            copyBtn.setVisibility(View.GONE);
+        }
 
         copyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,5 +129,13 @@ public class EditAccountActivity extends AppCompatActivity {
         }
         setResult(RESULT_OK, editAccountData);
         finish();
+    }
+
+    public void checkActionBar(SharedPreferences sh){
+        if(!sh.getBoolean("actionBarOption", false)){
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }else{
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }
     }
 }
