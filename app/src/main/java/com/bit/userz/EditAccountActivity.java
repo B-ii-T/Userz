@@ -73,24 +73,28 @@ public class EditAccountActivity extends AppCompatActivity {
             }
         });
 
-        editModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
-                    usernameEdit.setEnabled(true);
-                    emailEdit.setEnabled(true);
-                    passwordEdit.setEnabled(true);
-                    cat.setTextColor(Color.parseColor("#BFBFBF"));
-                    plat.setTextColor(Color.parseColor("#BFBFBF"));
-                }else{
-                    usernameEdit.setEnabled(false);
-                    emailEdit.setEnabled(false);
-                    passwordEdit.setEnabled(false);
-                    cat.setTextColor(Color.WHITE);
-                    plat.setTextColor(Color.WHITE);
+        if(sh.getBoolean("editModeOption", false)){
+            editModeSwitch.setVisibility(View.GONE);
+        }else{
+            editModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if (b){
+                        usernameEdit.setEnabled(true);
+                        emailEdit.setEnabled(true);
+                        passwordEdit.setEnabled(true);
+                        cat.setTextColor(Color.parseColor("#BFBFBF"));
+                        plat.setTextColor(Color.parseColor("#BFBFBF"));
+                    }else{
+                        usernameEdit.setEnabled(false);
+                        emailEdit.setEnabled(false);
+                        passwordEdit.setEnabled(false);
+                        cat.setTextColor(Color.WHITE);
+                        plat.setTextColor(Color.WHITE);
+                    }
                 }
-            }
-        });
+            });
+        }
 
         Intent intent = getIntent();
         if(intent.hasExtra(EXTRA_ID)){

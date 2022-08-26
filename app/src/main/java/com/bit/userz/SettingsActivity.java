@@ -15,7 +15,7 @@ import maes.tech.intentanim.CustomIntent;
 
 public class SettingsActivity extends AppCompatActivity {
     private ImageView closeOptionsBtn;
-    private Switch copySwitch, doubleTapSwitch, actionBarSwitch;
+    private Switch copySwitch, doubleTapSwitch, actionBarSwitch, editModeSwitch;
     SharedPreferences settingsPreferences;
     SharedPreferences.Editor editor;
     @Override
@@ -31,10 +31,12 @@ public class SettingsActivity extends AppCompatActivity {
         doubleTapSwitch = findViewById(R.id.double_back_switch);
         actionBarSwitch = findViewById(R.id.action_bar_switch);
         closeOptionsBtn = findViewById(R.id.close_options_btn);
+        editModeSwitch = findViewById(R.id.edit_mode_switch_option);
 
         copySwitch.setChecked(settingsPreferences.getBoolean("copyOption", false));
         doubleTapSwitch.setChecked(settingsPreferences.getBoolean("doubleTapOption", false));
         actionBarSwitch.setChecked(settingsPreferences.getBoolean("actionBarOption", false));
+        editModeSwitch.setChecked(settingsPreferences.getBoolean("editModeOption", false));
 
         copySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -56,6 +58,13 @@ public class SettingsActivity extends AppCompatActivity {
                 editor.putBoolean("actionBarOption", actionBarActive);
                 editor.commit();
                 checkActionBar(settingsPreferences);
+            }
+        });
+        editModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean editModeActive) {
+                editor.putBoolean("editModeOption", editModeActive);
+                editor.commit();
             }
         });
 

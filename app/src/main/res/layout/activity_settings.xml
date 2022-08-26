@@ -427,11 +427,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
-                        android:text="Edit mode (soon)"
+                        android:text="Edit mode"
                         android:textColor="@color/white"
                         android:textSize="17sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/setting_rule_icon"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <Switch
+                        android:id="@+id/edit_mode_switch_option"
+                        style="@style/in_round_switch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
