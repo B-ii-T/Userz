@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -48,6 +49,8 @@ public class EditAccountActivity extends AppCompatActivity {
         saveEditBtn = findViewById(R.id.save_edit_btn);
         copyBtn = findViewById(R.id.copy_btn);
         editModeSwitch = findViewById(R.id.edit_mode_switch);
+        TextView cat = findViewById(R.id.textView12);
+        TextView plat = findViewById(R.id.textView13);
 
         if(sh.getBoolean("copyOption", false)){
             copyBtn.setVisibility(View.VISIBLE);
@@ -77,10 +80,14 @@ public class EditAccountActivity extends AppCompatActivity {
                     usernameEdit.setEnabled(true);
                     emailEdit.setEnabled(true);
                     passwordEdit.setEnabled(true);
+                    cat.setTextColor(Color.parseColor("#BFBFBF"));
+                    plat.setTextColor(Color.parseColor("#BFBFBF"));
                 }else{
                     usernameEdit.setEnabled(false);
                     emailEdit.setEnabled(false);
                     passwordEdit.setEnabled(false);
+                    cat.setTextColor(Color.WHITE);
+                    plat.setTextColor(Color.WHITE);
                 }
             }
         });
