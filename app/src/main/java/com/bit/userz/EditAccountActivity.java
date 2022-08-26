@@ -73,7 +73,7 @@ public class EditAccountActivity extends AppCompatActivity {
             }
         });
 
-        if(sh.getBoolean("editModeOption", false)){
+        if(!sh.getBoolean("editModeOption", false)){
             editModeSwitch.setVisibility(View.GONE);
         }else{
             editModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
