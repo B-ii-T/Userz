@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -131,15 +134,24 @@ public class MainActivity extends AppCompatActivity {
         adapter.setOnAccountClickListener(new AccountAdapter.OnAccountClickListener() {
             @Override
             public void onAccountClick(Account account) {
-                Intent intent = new Intent(MainActivity.this, EditAccountActivity.class);
-                intent.putExtra(EditAccountActivity.EXTRA_ID, account.getId());
-                intent.putExtra(EditAccountActivity.EXTRA_USERNAME, account.getUsername());
-                intent.putExtra(EditAccountActivity.EXTRA_EMAIL, account.getEmail());
-                intent.putExtra(EditAccountActivity.EXTRA_PASSWORD, account.getPassword());
-                intent.putExtra(AddAccountActivity.EXTRA_CATEGORY, account.getCategory());
-                intent.putExtra(AddAccountActivity.EXTRA_PLATFORM, account.getPlatform());
-                intent.putExtra(EditAccountActivity.EXTRA_ICON, account.getIcon());
-                startActivityForResult(intent, EDIT_ACCOUNT_REQUEST);
+                if(sh.getBoolean("copyOption", false)){
+                    ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData passwordClip = ClipData.newPlainText("password", account.getPassword());
+                    ClipData emailClip = ClipData.newPlainText("email",account.getEmail());
+                    clipboard.setPrimaryClip(passwordClip);
+                    clipboard.setPrimaryClip(emailClip);
+                    Toast.makeText(MainActivity.this, "credentials copied", Toast.LENGTH_SHORT).show();
+                }else{
+                    Intent intent = new Intent(MainActivity.this, EditAccountActivity.class);
+                    intent.putExtra(EditAccountActivity.EXTRA_ID, account.getId());
+                    intent.putExtra(EditAccountActivity.EXTRA_USERNAME, account.getUsername());
+                    intent.putExtra(EditAccountActivity.EXTRA_EMAIL, account.getEmail());
+                    intent.putExtra(EditAccountActivity.EXTRA_PASSWORD, account.getPassword());
+                    intent.putExtra(AddAccountActivity.EXTRA_CATEGORY, account.getCategory());
+                    intent.putExtra(AddAccountActivity.EXTRA_PLATFORM, account.getPlatform());
+                    intent.putExtra(EditAccountActivity.EXTRA_ICON, account.getIcon());
+                    startActivityForResult(intent, EDIT_ACCOUNT_REQUEST);
+                }
             }
         });
 
