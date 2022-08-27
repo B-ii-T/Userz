@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private List<String> categoriesList = new ArrayList<>();
     private List<Account> accountsByCat = new ArrayList<>();
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         viewModel.getCatNumber().observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer catNumber) {
-                catNumberText.setText("("+catNumber+")");
+                catNumberText.setText("(" + catNumber + ")");
             }
         });
         viewModel.getAllCat().observe(this, new Observer<List<String>>() {
@@ -92,14 +93,14 @@ public class MainActivity extends AppCompatActivity {
         viewModel.getCount().observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer count) {
-                accountsCount.setText("("+count+")");
+                accountsCount.setText("(" + count + ")");
             }
         });
 
         findViewById(R.id.sort_category_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                for(String s : categoriesList){
+                for (String s : categoriesList) {
                     Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
                 }
             }
@@ -118,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -126,22 +128,29 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                viewModel.deleteAccount(adapter.getAccountAtPosition(viewHolder.getAdapterPosition()));
-                Toast.makeText(MainActivity.this, "Account deleted", Toast.LENGTH_SHORT).show();
+                if (sh.getBoolean("editModeOption", false)) {
+                    viewModel.deleteAccount(adapter.getAccountAtPosition(viewHolder.getAdapterPosition()));
+                    Toast.makeText(MainActivity.this, "Account deleted", Toast.LENGTH_SHORT).show();
+                }else{
+                    adapter.notifyDataSetChanged();
+                    Toast.makeText(MainActivity.this, "edit mode is disabled", Toast.LENGTH_SHORT).show();
+                    return;
+                }
             }
         }).attachToRecyclerView(recyclerView);
+
 
         adapter.setOnAccountClickListener(new AccountAdapter.OnAccountClickListener() {
             @Override
             public void onAccountClick(Account account) {
-                if(sh.getBoolean("copyOption", false)){
+                if (sh.getBoolean("copyOption", false)) {
                     ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
                     ClipData passwordClip = ClipData.newPlainText("password", account.getPassword());
-                    ClipData emailClip = ClipData.newPlainText("email",account.getEmail());
+                    ClipData emailClip = ClipData.newPlainText("email", account.getEmail());
                     clipboard.setPrimaryClip(passwordClip);
                     clipboard.setPrimaryClip(emailClip);
                     Toast.makeText(MainActivity.this, "credentials copied to clipboard", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     Intent intent = new Intent(MainActivity.this, EditAccountActivity.class);
                     intent.putExtra(EditAccountActivity.EXTRA_ID, account.getId());
                     intent.putExtra(EditAccountActivity.EXTRA_USERNAME, account.getUsername());
@@ -163,12 +172,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    public void nextSettings (View v){
-    View view = findViewById(R.id.option_bar);
+
+    public void nextSettings(View v) {
+        View view = findViewById(R.id.option_bar);
         view.setVisibility(View.GONE);
-    view = findViewById(R.id.contentmain);
+        view = findViewById(R.id.contentmain);
         view.setVisibility(View.GONE);
-    view = findViewById(R.id.Frst);
+        view = findViewById(R.id.Frst);
         view.setVisibility(View.VISIBLE);
 
     }
@@ -176,17 +186,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == ADD_ACCOUNT_REQUEST && resultCode == RESULT_OK){
+        if (requestCode == ADD_ACCOUNT_REQUEST && resultCode == RESULT_OK) {
             String username = data.getStringExtra(AddAccountActivity.EXTRA_USERNAME);
             String email = data.getStringExtra(AddAccountActivity.EXTRA_EMAIL);
             String password = data.getStringExtra(AddAccountActivity.EXTRA_PASSWORD);
             String category = data.getStringExtra(AddAccountActivity.EXTRA_CATEGORY);
-            String platform = data.getStringExtra(AddAccountActivity.EXTRA_PLATFORM).substring(0,1).toUpperCase()+data.getStringExtra(AddAccountActivity.EXTRA_PLATFORM).substring(1);
+            String platform = data.getStringExtra(AddAccountActivity.EXTRA_PLATFORM).substring(0, 1).toUpperCase() + data.getStringExtra(AddAccountActivity.EXTRA_PLATFORM).substring(1);
 
             Account account = new Account(username, email, password, category, platform, fillIcon(platform), sdf.format(new Date()));
             viewModel.insertAccount(account);
             Toast.makeText(this, "new account saved", Toast.LENGTH_SHORT).show();
-        } else if(requestCode == EDIT_ACCOUNT_REQUEST && resultCode == RESULT_OK){
+        } else if (requestCode == EDIT_ACCOUNT_REQUEST && resultCode == RESULT_OK) {
             int accountId = data.getIntExtra(EditAccountActivity.EXTRA_ID, -1);
             String username = data.getStringExtra(EditAccountActivity.EXTRA_USERNAME);
             String email = data.getStringExtra(EditAccountActivity.EXTRA_EMAIL);
@@ -194,7 +204,7 @@ public class MainActivity extends AppCompatActivity {
             String category = data.getStringExtra(AddAccountActivity.EXTRA_CATEGORY);
             String platform = data.getStringExtra(AddAccountActivity.EXTRA_PLATFORM);
             int icon = data.getIntExtra(EditAccountActivity.EXTRA_ICON, R.drawable.ic_launcher_foreground);
-            if(accountId == -1){
+            if (accountId == -1) {
                 Toast.makeText(this, "can't update account", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -202,16 +212,16 @@ public class MainActivity extends AppCompatActivity {
             account.setId(accountId);
             viewModel.updateAccount(account);
             Toast.makeText(this, "account updated", Toast.LENGTH_SHORT).show();
-        } else{
+        } else {
 //            Toast.makeText(this, "new account not saved", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public int fillIcon(String platform){
+    public int fillIcon(String platform) {
         int icon = R.drawable.user;
-        for(PlatformSuggestion ps : AddAccountActivity.platformSuggestions){
-            if(platform.toLowerCase().trim().equals(ps.getPlatformName())){
-                icon =  ps.getPlatformImg();
+        for (PlatformSuggestion ps : AddAccountActivity.platformSuggestions) {
+            if (platform.toLowerCase().trim().equals(ps.getPlatformName())) {
+                icon = ps.getPlatformImg();
                 return icon;
             }
         }
@@ -220,21 +230,22 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(sh.getBoolean("doubleTapOption", false)){
-            if(back_pressed + TIME_DELAY > System.currentTimeMillis()){
+        if (sh.getBoolean("doubleTapOption", false)) {
+            if (back_pressed + TIME_DELAY > System.currentTimeMillis()) {
                 super.onBackPressed();
-            }else{
+            } else {
                 Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
             }
             back_pressed = System.currentTimeMillis();
-        }else{
+        } else {
             super.onBackPressed();
         }
     }
-    public void checkActionBar(SharedPreferences sh){
-        if(!sh.getBoolean("actionBarOption", false)){
+
+    public void checkActionBar(SharedPreferences sh) {
+        if (!sh.getBoolean("actionBarOption", false)) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        }else{
+        } else {
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
     }

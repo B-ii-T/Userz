@@ -52,12 +52,6 @@ public class EditAccountActivity extends AppCompatActivity {
         TextView cat = findViewById(R.id.textView12);
         TextView plat = findViewById(R.id.textView13);
 
-        if(sh.getBoolean("copyOption", false)){
-            copyBtn.setVisibility(View.VISIBLE);
-        }else{
-            copyBtn.setVisibility(View.GONE);
-        }
-
         copyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,8 +67,14 @@ public class EditAccountActivity extends AppCompatActivity {
             }
         });
 
-        if(!sh.getBoolean("editModeOption", false)){
-            editModeSwitch.setVisibility(View.GONE);
+        if(sh.getBoolean("editModeOption", false)){
+            editModeSwitch.setChecked(true);
+            editModeSwitch.setEnabled(false);
+            usernameEdit.setEnabled(true);
+            emailEdit.setEnabled(true);
+            passwordEdit.setEnabled(true);
+            cat.setTextColor(Color.parseColor("#BFBFBF"));
+            plat.setTextColor(Color.parseColor("#BFBFBF"));
         }else{
             editModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
