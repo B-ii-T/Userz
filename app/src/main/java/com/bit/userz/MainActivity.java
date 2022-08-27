@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
                     ClipData emailClip = ClipData.newPlainText("email",account.getEmail());
                     clipboard.setPrimaryClip(passwordClip);
                     clipboard.setPrimaryClip(emailClip);
-                    Toast.makeText(MainActivity.this, "credentials copied", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "credentials copied to clipboard", Toast.LENGTH_SHORT).show();
                 }else{
                     Intent intent = new Intent(MainActivity.this, EditAccountActivity.class);
                     intent.putExtra(EditAccountActivity.EXTRA_ID, account.getId());
