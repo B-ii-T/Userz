@@ -81,7 +81,7 @@
                 style="@style/input_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Email" />
+                android:text="Email / Phone Number" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/email_edit_text_input_layout"

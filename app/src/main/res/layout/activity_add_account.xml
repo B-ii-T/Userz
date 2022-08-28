@@ -61,7 +61,7 @@
                 android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Email"
+                android:text="Email / Phone Number"
                 android:textColor="@color/white"
                 android:textSize="17sp" />
 
@@ -169,9 +169,8 @@
                         android:id="@+id/platform_input"
                         style="@style/input_text"
                         android:layout_width="match_parent"
-                        android:completionThreshold="1"
+                        android:completionThreshold="0"
                         android:dropDownHeight="200dp"
-
                         android:inputType="text" />
                 </com.google.android.material.textfield.TextInputLayout>
 

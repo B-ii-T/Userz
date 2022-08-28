@@ -41,6 +41,7 @@ public class AddAccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_account);
         fillPlatformList();
         platform = findViewById(R.id.platform_input);
+        platform.setThreshold(0);
         PlatformAdapter platformAdapter = new PlatformAdapter(this, platformSuggestions);
         platform.setAdapter(platformAdapter);
 
