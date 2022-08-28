@@ -12,6 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="buttonStyle">@style/button_icon</item>
         <item name="android:switchStyle">@style/in_round_switch</item>
     </style>
 
@@ -92,5 +93,14 @@
     <style name="input_title">
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">17sp</item>
+    </style>
+    <style name="button_icon">
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="background">@drawable/bg_shape_solid</item>
+        <item name="backgroundTint">@color/primary</item>
+        <item name="android:drawableStart">@android:drawable/stat_sys_warning</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 </resources>
