@@ -199,7 +199,7 @@
             android:layout_gravity="center"
             android:background="@drawable/bg_shape_solid"
             android:backgroundTint="@color/primary"
-            android:drawableStart="@drawable/ic_save_svgrepo_com"
+            android:drawableStart="@drawable/ic_save_vct"
             android:text="save"
             android:textColor="@color/white" />
     </LinearLayout>

@@ -177,7 +177,7 @@
                 android:layout_marginEnd="15dp"
                 android:background="@drawable/bg_shape_solid"
                 android:backgroundTint="@color/primary"
-                android:drawableStart="@drawable/ic_save_svgrepo_com"
+                android:drawableStart="@drawable/ic_save_vct"
                 android:text="save" />
 
             <Button
