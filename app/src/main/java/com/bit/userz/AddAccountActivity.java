@@ -125,7 +125,7 @@ public class AddAccountActivity extends AppCompatActivity {
         platformSuggestions.add(new PlatformSuggestion("linkedin", R.drawable.linkedin));
     }
     public void checkActionBar(SharedPreferences sh){
-        if(!sh.getBoolean("actionBarOption", false)){
+        if(sh.getBoolean("actionBarOption", false)){
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }else{
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);

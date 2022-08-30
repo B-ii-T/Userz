@@ -77,7 +77,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void checkActionBar(SharedPreferences sh){
-        if(!sh.getBoolean("actionBarOption", false)){
+        if(sh.getBoolean("actionBarOption", false)){
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }else{
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);

@@ -24,6 +24,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -62,6 +64,13 @@ public class MainActivity extends AppCompatActivity {
 
         final AccountAdapter adapter = new AccountAdapter();
         recyclerView.setAdapter(adapter);
+
+        if (sh.getBoolean("editModeOption", false)) {
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.main_activity_layout), "Edit mode is On", Snackbar.LENGTH_SHORT);
+            snackbar.getView().setBackgroundColor(getResources().getColor(R.color.secondary100));
+            snackbar.setTextColor(getResources().getColor(R.color.primary));
+            snackbar.show();
+        }
 
         viewModel = new ViewModelProvider(this).get(AccountViewModel.class);
         viewModel.getAllAccounts().observe(this, new Observer<List<Account>>() {
@@ -243,7 +252,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void checkActionBar(SharedPreferences sh) {
-        if (!sh.getBoolean("actionBarOption", false)) {
+        if (sh.getBoolean("actionBarOption", false)) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         } else {
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
