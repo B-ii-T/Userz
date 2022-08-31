@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(List<String> categories) {
                 // update categories list view
                 categoriesList = categories;
+                AddAccountActivity.categorySuggestions = categories;
             }
         });
         viewModel.getAccountsByCat("service").observe(this, new Observer<List<Account>>() {

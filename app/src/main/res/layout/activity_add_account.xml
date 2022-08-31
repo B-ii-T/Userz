@@ -139,9 +139,12 @@
                 android:layout_height="wrap_content"
                 app:endIconMode="clear_text">
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/category_input"
                     style="@style/input_text"
+                    android:dropDownHeight="200dp"
+                    android:completionThreshold="1"
+                    android:nextFocusDown="@id/platform_input"
                     android:layout_width="match_parent"
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -169,8 +172,9 @@
                         android:id="@+id/platform_input"
                         style="@style/input_text"
                         android:layout_width="match_parent"
-                        android:completionThreshold="0"
+                        android:completionThreshold="1"
                         android:dropDownHeight="200dp"
+                        android:imeOptions="actionDone"
                         android:inputType="text" />
                 </com.google.android.material.textfield.TextInputLayout>
 

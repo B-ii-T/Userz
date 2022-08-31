@@ -7,9 +7,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,12 +29,11 @@ public class AddAccountActivity extends AppCompatActivity {
     public static final String EXTRA_PASSWORD = "PASSWORD";
     public static final String EXTRA_CATEGORY = "CATEGORY";
     public static final String EXTRA_PLATFORM = "PLATFORM";
-    private EditText username, email, password, category;
-    private AutoCompleteTextView platform;
+    private EditText username, email, password;
+    private AutoCompleteTextView platform, category;
     private ImageView platformImage;
     private Button saveBtn;
-
-
+    public static List<String> categorySuggestions = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +52,9 @@ public class AddAccountActivity extends AppCompatActivity {
         category = findViewById(R.id.category_input);
         platformImage = findViewById(R.id.platform_img);
         saveBtn = findViewById(R.id.save_btn);
+
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, categorySuggestions);
+        category.setAdapter(categoryAdapter);
 
         platform.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -83,6 +87,19 @@ public class AddAccountActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 saveAccount();
+            }
+        });
+
+        category.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN)
+                        && (i == KeyEvent.KEYCODE_ENTER)) {
+                    category.clearFocus();
+                    platform.requestFocus();
+                    return true;
+                }
+                return false;
             }
         });
 
