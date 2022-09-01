@@ -2,6 +2,7 @@ package com.bit.userz;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -139,8 +141,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 if (sh.getBoolean("editModeOption", false)) {
-                    viewModel.deleteAccount(adapter.getAccountAtPosition(viewHolder.getAdapterPosition()));
-                    Toast.makeText(MainActivity.this, "Account deleted", Toast.LENGTH_SHORT).show();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setMessage("Do you want to delete this account ?");
+                    builder.setTitle("Delete account");
+                    builder.setCancelable(false);
+                    builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> {
+                        viewModel.deleteAccount(adapter.getAccountAtPosition(viewHolder.getAdapterPosition()));
+                        Toast.makeText(MainActivity.this, "Account deleted", Toast.LENGTH_SHORT).show();
+                    });
+                    builder.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog, which) -> {
+                        adapter.notifyDataSetChanged();
+                        dialog.cancel();
+                    });
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
                 }else{
                     adapter.notifyDataSetChanged();
                     Toast.makeText(MainActivity.this, "edit mode is disabled", Toast.LENGTH_SHORT).show();
