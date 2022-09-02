@@ -67,13 +67,6 @@ public class MainActivity extends AppCompatActivity {
         final AccountAdapter adapter = new AccountAdapter();
         recyclerView.setAdapter(adapter);
 
-        if (sh.getBoolean("editModeOption", false)) {
-            Snackbar snackbar = Snackbar.make(findViewById(R.id.main_activity_layout), "Edit mode is On", Snackbar.LENGTH_SHORT);
-            snackbar.getView().setBackgroundColor(getResources().getColor(R.color.secondary100));
-            snackbar.setTextColor(getResources().getColor(R.color.primary));
-            snackbar.show();
-        }
-
         viewModel = new ViewModelProvider(this).get(AccountViewModel.class);
         viewModel.getAllAccounts().observe(this, new Observer<List<Account>>() {
             @Override
@@ -278,6 +271,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         checkActionBar(sh);
+        if (sh.getBoolean("editModeOption", false)) {
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.main_activity_layout), "Edit mode is On", Snackbar.LENGTH_SHORT);
+            snackbar.getView().setBackgroundColor(getResources().getColor(R.color.secondary100));
+            snackbar.setTextColor(getResources().getColor(R.color.primary));
+            snackbar.show();
+        }
     }
 
     @Override
