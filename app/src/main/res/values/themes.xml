@@ -26,6 +26,15 @@
 
     <style name="Theme.SmallestViolent.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="button_icon" parent="Widget.MaterialComponents.Button">
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="background">@drawable/bg_shape_solid</item>
+        <item name="backgroundTint">@color/primary</item>
+        <item name="android:drawableStart">@android:drawable/stat_sys_warning</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
     <style name="round_btn">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">match_parent</item>
@@ -56,13 +65,13 @@
         <item name="android:scaleX">1.35</item>
         <item name="android:scaleY">1.35</item>
     </style><style name="in_round_text_switch" >
-        <item name="android:thumb">@drawable/bg_switch_text_thumb</item>
-        <item name="android:track">@drawable/bg_switch_text</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:clickable">true</item>
-        <item name="android:textColor">@color/white</item>
-    </style>
+    <item name="android:thumb">@drawable/bg_switch_text_thumb</item>
+    <item name="android:track">@drawable/bg_switch_text</item>
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:clickable">true</item>
+    <item name="android:textColor">@color/white</item>
+</style>
     <style name="settings_container">
         <item name="android:layout_marginBottom">16dp</item>
         <item name="android:paddingLeft">12dp</item>/
@@ -94,14 +103,5 @@
     <style name="input_title">
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">17sp</item>
-    </style>
-<style name="button_icon" parent="Widget.MaterialComponents.Button">
-        <item name="android:layout_width">150dp</item>
-        <item name="android:layout_height">50dp</item>
-        <item name="background">@drawable/bg_shape_solid</item>
-        <item name="backgroundTint">@color/primary</item>
-        <item name="android:drawableStart">@android:drawable/stat_sys_warning</item>
-        <item name="android:padding">12dp</item>
-        <item name="android:textColor">@color/white</item>
     </style>
 </resources>

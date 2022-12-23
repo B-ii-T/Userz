@@ -177,12 +177,14 @@
                 android:background="@drawable/bg_shape_solid"
                 android:backgroundTint="@color/primary"
                 android:drawableStart="@drawable/ic_save_vct"
+                android:padding="12dp"
+                android:textColor="@color/white"
                 android:text="Save" />
 
             <Button
                 android:id="@+id/copy_btn"
                 android:layout_width="150dp"
-                android:layout_height="50dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="start"
                 android:background="@drawable/bg_shape_solid"
                 android:backgroundTint="@color/primary"

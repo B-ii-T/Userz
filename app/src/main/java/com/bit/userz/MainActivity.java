@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         viewModel.getCatNumber().observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer catNumber) {
-                catNumberText.setText("(" + catNumber + ")");
+                catNumberText.setText(" ∙ " + catNumber );
             }
         });
         viewModel.getAllCat().observe(this, new Observer<List<String>>() {
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         viewModel.getCount().observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer count) {
-                accountsCount.setText("(" + count + ")");
+                accountsCount.setText("« " + count );
             }
         });
 

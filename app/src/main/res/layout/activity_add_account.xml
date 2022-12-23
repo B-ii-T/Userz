@@ -196,15 +196,19 @@
 
         <Button
             android:id="@+id/save_btn"
-            style="@style/button_icon"
             android:layout_width="180dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
+            android:textAlignment="center"
             android:background="@drawable/bg_shape_solid"
             android:backgroundTint="@color/primary"
             android:drawableStart="@drawable/ic_save_vct"
-            android:text="save"
-            android:textColor="@color/white" />
+            android:text="Save"
+            android:textColor="@color/white"
+            style="@style/button_icon"
+            android:textSize="17sp"
+            android:textAllCaps="true"
+             />
     </LinearLayout>
 
 </ScrollView>

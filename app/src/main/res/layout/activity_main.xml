@@ -37,6 +37,7 @@
                     android:text="@string/app_name"
                     android:textColor="@color/white"
                     android:textSize="24sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView2"
                     app:layout_constraintTop_toTopOf="parent"
@@ -263,10 +264,10 @@
         android:paddingRight="14dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/Accounts_title"
@@ -275,7 +276,9 @@
                 android:text="Accounts"
                 android:textColor="@color/primary"
                 android:textSize="27sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/accounts_count"
@@ -285,8 +288,10 @@
                 android:text="(accounts)"
                 android:textColor="@color/primary"
                 android:textSize="27sp"
-                android:textStyle="normal" />
-        </LinearLayout>
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"

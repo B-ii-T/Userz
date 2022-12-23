@@ -1,11 +1,5 @@
 package com.bit.userz;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.biometric.BiometricManager;
-import androidx.biometric.BiometricPrompt;
-import androidx.core.content.ContextCompat;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,6 +7,12 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.biometric.BiometricManager;
+import androidx.biometric.BiometricPrompt;
+import androidx.core.content.ContextCompat;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -22,6 +22,8 @@ public class SplashScreen extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash_screen);
+
+
 
 //        new Handler().postDelayed(new Runnable() {
 //            @Override
@@ -61,7 +63,12 @@ public class SplashScreen extends AppCompatActivity {
         BiometricPrompt.PromptInfo info = new BiometricPrompt.PromptInfo.Builder()
                 .setTitle("Biometric authentication")
                 .setNegativeButtonText("Cancel").build();
-
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                prompt.authenticate(info);
+            }
+        }, 5500);
         findViewById(R.id.logo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
