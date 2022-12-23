@@ -696,7 +696,7 @@
                         android:alpha="0.6"
                         android:background="@drawable/bg_btn"
                         android:backgroundTint="@color/white"
-                        tools:ignore="DuplicateIds">
+                        tools:ignore="DuplicateIds"/>
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
