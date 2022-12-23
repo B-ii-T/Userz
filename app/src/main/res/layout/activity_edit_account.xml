@@ -170,7 +170,6 @@
 
             <Button
                 android:id="@+id/save_edit_btn"
-                style="@style/button_icon"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
@@ -178,7 +177,7 @@
                 android:background="@drawable/bg_shape_solid"
                 android:backgroundTint="@color/primary"
                 android:drawableStart="@drawable/ic_save_vct"
-                android:text="save" />
+                android:text="Save" />
 
             <Button
                 android:id="@+id/copy_btn"
