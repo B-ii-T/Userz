@@ -37,7 +37,7 @@ public abstract class AccountsDatabase extends RoomDatabase {
         @Override
         protected Void doInBackground(Void... voids) {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            accountDao.insert(new Account("Test account", "test@gmail.com", "0000", "social media", "messenger", R.drawable.messenger, sdf.format(new Date())));
+            accountDao.insert(new Account("Test account", "test@gmail.com", "0000", "social media", "Messenger", R.drawable.messenger, sdf.format(new Date())));
             return null;
         }
     }

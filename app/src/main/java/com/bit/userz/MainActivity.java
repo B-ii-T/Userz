@@ -2,6 +2,7 @@ package com.bit.userz;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -23,6 +25,8 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -82,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(List<String> categories) {
                 // update categories list view
                 categoriesList = categories;
+                AddAccountActivity.categorySuggestions = categories;
             }
         });
         viewModel.getAccountsByCat("service").observe(this, new Observer<List<Account>>() {
@@ -129,8 +134,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 if (sh.getBoolean("editModeOption", false)) {
-                    viewModel.deleteAccount(adapter.getAccountAtPosition(viewHolder.getAdapterPosition()));
-                    Toast.makeText(MainActivity.this, "Account deleted", Toast.LENGTH_SHORT).show();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setMessage("Do you want to delete this account ?");
+                    builder.setTitle("Delete account");
+                    builder.setCancelable(false);
+                    builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> {
+                        viewModel.deleteAccount(adapter.getAccountAtPosition(viewHolder.getAdapterPosition()));
+                        Toast.makeText(MainActivity.this, "Account deleted", Toast.LENGTH_SHORT).show();
+                    });
+                    builder.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog, which) -> {
+                        adapter.notifyDataSetChanged();
+                        dialog.cancel();
+                    });
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
                 }else{
                     adapter.notifyDataSetChanged();
                     Toast.makeText(MainActivity.this, "edit mode is disabled", Toast.LENGTH_SHORT).show();
@@ -243,7 +260,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void checkActionBar(SharedPreferences sh) {
-        if (!sh.getBoolean("actionBarOption", false)) {
+        if (sh.getBoolean("actionBarOption", false)) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         } else {
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -254,6 +271,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         checkActionBar(sh);
+        if (sh.getBoolean("editModeOption", false)) {
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.main_activity_layout), "Edit mode is On", Snackbar.LENGTH_SHORT);
+            snackbar.getView().setBackgroundColor(getResources().getColor(R.color.secondary100));
+            snackbar.setTextColor(getResources().getColor(R.color.primary));
+            snackbar.show();
+        }
     }
 
     @Override
