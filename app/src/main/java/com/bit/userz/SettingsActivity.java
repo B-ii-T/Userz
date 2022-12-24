@@ -1,12 +1,15 @@
 package com.bit.userz;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -74,6 +77,26 @@ public class SettingsActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        findViewById(R.id.visit_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clickOnBit();
+            }
+        });
+        findViewById(R.id.share_userz_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clickOnUserz();
+            }
+        });
+        findViewById(R.id.rate_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(SettingsActivity.this, "Userz not deployed yet.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     public void checkActionBar(SharedPreferences sh){
@@ -101,4 +124,17 @@ public class SettingsActivity extends AppCompatActivity {
         super.finish();
         CustomIntent.customType(this, "right-to-left");
     }
+
+    public void launchURL(String url){
+                Intent viewIntent =
+                        new Intent("android.intent.action.VIEW",
+                                Uri.parse(url));
+                startActivity(viewIntent);
+    }
+    public void clickOnBit(){
+        launchURL("https://bit-official.carrd.co");
+    }public void clickOnUserz(){
+        launchURL("https://userz-app.carrd.co");
+    }
 }
+
