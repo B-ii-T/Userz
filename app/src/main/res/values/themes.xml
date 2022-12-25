@@ -22,10 +22,6 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.SmallestViolent.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="Theme.SmallestViolent.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
     <style name="button_icon" parent="Widget.MaterialComponents.Button">
         <item name="android:layout_width">150dp</item>
         <item name="android:layout_height">50dp</item>

@@ -7,11 +7,10 @@
     android:background="@color/black"
     android:orientation="vertical">
 
-    <com.google.android.material.appbar.AppBarLayout
+<com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/black"
-        android:theme="@style/Theme.SmallestViolent.AppBarOverlay">
+        android:background="@color/black">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -99,7 +98,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
-                        android:id="@+id/search_btn"
+                        android:id="@+id/add_btn"
                         android:layout_width="52dp"
                         android:layout_height="52dp"
                         android:background="@drawable/bg_btn"
@@ -119,7 +118,7 @@
                         android:textSize="12sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/search_btn" />
+                        app:layout_constraintTop_toBottomOf="@+id/add_btn" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -222,7 +221,7 @@
                     app:layout_constraintTop_toTopOf="@+id/constraintLayout18">
 
                     <ImageView
-                        android:id="@+id/add_btn"
+                        android:id="@+id/search_btn"
                         android:layout_width="52dp"
                         android:layout_height="52dp"
                         android:background="@drawable/bg_btn"
@@ -243,7 +242,7 @@
                         android:textSize="12sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/add_btn" />
+                        app:layout_constraintTop_toBottomOf="@+id/search_btn" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
