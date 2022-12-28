@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -28,6 +29,10 @@ public class SettingsActivity extends AppCompatActivity {
         editor = settingsPreferences.edit();
         checkActionBar(settingsPreferences);
         setContentView(R.layout.activity_settings);
+
+
+        Window window = this.getWindow();
+        window.setStatusBarColor(this.getResources().getColor(R.color.black));
 
 
         copySwitch = findViewById(R.id.copy_switch);

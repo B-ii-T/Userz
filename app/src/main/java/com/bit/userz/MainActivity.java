@@ -1,5 +1,23 @@
 package com.bit.userz;
 
+import android.animation.LayoutTransition;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.transition.AutoTransition;
+import android.transition.TransitionManager;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -10,19 +28,6 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.android.material.snackbar.Snackbar;
 
 import java.text.SimpleDateFormat;
@@ -30,7 +35,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import maes.tech.intentanim.CustomIntent;
 
 public class MainActivity extends AppCompatActivity {
     SharedPreferences sh;
@@ -51,6 +55,36 @@ public class MainActivity extends AppCompatActivity {
         sh = getSharedPreferences("settingsPreferences", MODE_PRIVATE);
         checkActionBar(sh);
         setContentView(R.layout.activity_main);
+
+        Window window = this.getWindow();
+        window.setStatusBarColor(this.getResources().getColor(R.color.black));
+
+        LinearLayout layout =  findViewById(R.id.title_container);
+        layout.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
+        findViewById(R.id.search_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                View vi = findViewById(R.id.search_field);
+                int v = (vi.getVisibility() == View.GONE)? View.VISIBLE: View.GONE;
+                TransitionManager.beginDelayedTransition(layout,new AutoTransition());
+                vi.setVisibility(v);
+                }
+        });
+        findViewById(R.id.sort_category_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                View vi = findViewById(R.id.categories_recycler);
+                int v = (vi.getVisibility() == View.GONE)? View.VISIBLE: View.GONE;
+                TransitionManager.beginDelayedTransition(layout,new AutoTransition());
+                vi.setVisibility(v);
+                for (String s : categoriesList) {
+                    Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+
         catNumberText = findViewById(R.id.category_number_text);
         accountsCount = findViewById(R.id.accounts_count);
         addBtn = findViewById(R.id.add_btn);
@@ -99,14 +133,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.sort_category_btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                for (String s : categoriesList) {
-                    Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+
         findViewById(R.id.sort_category_btn).setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -182,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class));
-                CustomIntent.customType(MainActivity.this, "left-to-right");
+//                CustomIntent.customType(MainActivity.this, "left-to-right");
             }
         });
     }
@@ -281,4 +308,5 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         checkActionBar(sh);
     }
+
 }
