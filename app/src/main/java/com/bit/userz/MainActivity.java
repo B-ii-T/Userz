@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private AccountViewModel viewModel;
     private TextView catNumberText, accountsCount;
     private EditText searchField;
-    private ImageView addBtn, optionsBtn;
+    private ImageView addBtn, optionsBtn, sortAllBtn;
     private List<String> categoriesList = new ArrayList<>();
     private List<Account> accountsByCat = new ArrayList<>();
     private List<Account> allAccounts = new ArrayList<>();
@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
         searchField = findViewById(R.id.search_field);
         addBtn = findViewById(R.id.add_btn);
         optionsBtn = findViewById(R.id.options_btn);
+        sortAllBtn = findViewById(R.id.sort_all_btn);
         SharedPreferences sh = getSharedPreferences("settingsPreferences", MODE_PRIVATE);
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
@@ -153,6 +154,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivityForResult(new Intent(MainActivity.this, AddAccountActivity.class), ADD_ACCOUNT_REQUEST);
+            }
+        });
+
+        sortAllBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewModel.getAllAccounts().observe(MainActivity.this, new Observer<List<Account>>() {
+                    @Override
+                    public void onChanged(List<Account> accounts) {
+                        adapter.setAccounts(accounts);
+                        TransitionManager.beginDelayedTransition(layout,new AutoTransition());
+                        searchField.setVisibility(View.GONE);
+                        searchField.setText("");
+                    }
+                });
             }
         });
 
