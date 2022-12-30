@@ -6,6 +6,11 @@ android {
     compileSdkVersion 32
     buildToolsVersion "30.0.3"
 
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
     defaultConfig {
         applicationId "com.bit.userz"
         minSdkVersion 24
@@ -21,6 +26,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -50,5 +56,7 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:$room_version"
 
     implementation "com.github.hajiyevelnur92:intentanimation:1.0"
+
+    implementation "com.google.android.play:core:1.6.4"
 
 }

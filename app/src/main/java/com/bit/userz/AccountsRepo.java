@@ -10,6 +10,7 @@ import java.util.List;
 public class AccountsRepo {
     private AccountDao accountDao;
     private LiveData<List<Account>> allAccounts;
+    private LiveData<List<Account>> AccountsByUsername;
     private LiveData<Integer> catNumber;
     private LiveData<Integer> count;
     private LiveData<List<String>> allCat;
@@ -49,6 +50,10 @@ public class AccountsRepo {
     public LiveData<List<Account>> getAccountsByCat(String cat) {
         accountsByCat = accountDao.getAllAccountsByCategory(cat);
         return accountsByCat;
+    }
+    public LiveData<List<Account>> getAccountsByUsername(String username) {
+        AccountsByUsername = accountDao.getAccountsByUsername(username);
+        return AccountsByUsername;
     }
 
     //Async Tasks

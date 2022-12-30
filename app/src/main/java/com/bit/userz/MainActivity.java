@@ -8,11 +8,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -35,6 +38,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import maes.tech.intentanim.CustomIntent;
+
 
 public class MainActivity extends AppCompatActivity {
     SharedPreferences sh;
@@ -44,9 +49,11 @@ public class MainActivity extends AppCompatActivity {
     public static final int EDIT_ACCOUNT_REQUEST = 2;
     private AccountViewModel viewModel;
     private TextView catNumberText, accountsCount;
+    private EditText searchField;
     private ImageView addBtn, optionsBtn;
     private List<String> categoriesList = new ArrayList<>();
     private List<Account> accountsByCat = new ArrayList<>();
+    private List<Account> allAccounts = new ArrayList<>();
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
     @Override
@@ -64,10 +71,9 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.search_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                View vi = findViewById(R.id.search_field);
-                int v = (vi.getVisibility() == View.GONE)? View.VISIBLE: View.GONE;
+                int v = (searchField.getVisibility() == View.GONE)? View.VISIBLE: View.GONE;
                 TransitionManager.beginDelayedTransition(layout,new AutoTransition());
-                vi.setVisibility(v);
+                searchField.setVisibility(v);
                 }
         });
         findViewById(R.id.sort_category_btn).setOnClickListener(new View.OnClickListener() {
@@ -87,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
         catNumberText = findViewById(R.id.category_number_text);
         accountsCount = findViewById(R.id.accounts_count);
+        searchField = findViewById(R.id.search_field);
         addBtn = findViewById(R.id.add_btn);
         optionsBtn = findViewById(R.id.options_btn);
         SharedPreferences sh = getSharedPreferences("settingsPreferences", MODE_PRIVATE);
@@ -103,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<Account> accounts) {
                 //updating he recycler view
+                allAccounts = accounts;
                 adapter.setAccounts(accounts);
             }
         });
@@ -205,11 +213,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        searchField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String searchWord = "%"+editable.toString().concat("%");
+                viewModel.getAccountsByUsername(searchWord).observe(MainActivity.this, new Observer<List<Account>>() {
+                    @Override
+                    public void onChanged(List<Account> accounts) {
+                        adapter.setAccounts(accounts);
+                    }
+                });
+            }
+        });
+
         optionsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class));
-//                CustomIntent.customType(MainActivity.this, "left-to-right");
+                CustomIntent.customType(MainActivity.this, "left-to-right");
             }
         });
     }

@@ -21,6 +21,8 @@ public interface AccountDao {
     void deleteAll();
     @Query("SELECT * FROM accounts_table")
     LiveData<List<Account>> getAllAccounts();
+    @Query("SELECT * FROM accounts_table WHERE username like :username")
+    LiveData<List<Account>> getAccountsByUsername(String username);
     @Query("SELECT COUNT(*) FROM accounts_table")
     LiveData<Integer> getCount();
     //getting the number of categories
