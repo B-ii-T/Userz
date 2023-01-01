@@ -106,6 +106,25 @@ public class MainActivity extends AppCompatActivity {
         final AccountAdapter adapter = new AccountAdapter();
         recyclerView.setAdapter(adapter);
 
+        RecyclerView cat_recyclerView = findViewById(R.id.categories_recycler);
+        cat_recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        cat_recyclerView.setHasFixedSize(true);
+
+        final CatAdapter catAdapter = new CatAdapter();
+        cat_recyclerView.setAdapter(catAdapter);
+
+        catAdapter.setOnCategoryClickListener(new CatAdapter.onCatClickListener() {
+            @Override
+            public void onCatClick(String cat) {
+                viewModel.getAccountsByCat(cat).observe(MainActivity.this, new Observer<List<Account>>() {
+                    @Override
+                    public void onChanged(List<Account> accounts) {
+                        adapter.setAccounts(accounts);
+                    }
+                });
+            }
+        });
+
         viewModel = new ViewModelProvider(this).get(AccountViewModel.class);
         viewModel.getAllAccounts().observe(this, new Observer<List<Account>>() {
             @Override
@@ -124,9 +143,7 @@ public class MainActivity extends AppCompatActivity {
         viewModel.getAllCat().observe(this, new Observer<List<String>>() {
             @Override
             public void onChanged(List<String> categories) {
-                // update categories list view
-                categoriesList = categories;
-                AddAccountActivity.categorySuggestions = categories;
+                catAdapter.setCats(categories);
             }
         });
         viewModel.getAccountsByCat("service").observe(this, new Observer<List<Account>>() {
@@ -166,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
                         adapter.setAccounts(accounts);
                         TransitionManager.beginDelayedTransition(layout,new AutoTransition());
                         searchField.setVisibility(View.GONE);
-                        searchField.setText("");
+                        searchField.getText().clear();
                     }
                 });
             }
