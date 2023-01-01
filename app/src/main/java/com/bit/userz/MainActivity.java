@@ -88,6 +88,8 @@ public class MainActivity extends AppCompatActivity {
                 TransitionManager.beginDelayedTransition(layout,new AutoTransition());
                 if (v != View.GONE)
                     navBarState(2);
+                else
+                    navBarState(21);
                 }
         });
         findViewById(R.id.sort_category_btn).setOnClickListener(new View.OnClickListener() {
@@ -98,9 +100,9 @@ public class MainActivity extends AppCompatActivity {
                 TransitionManager.beginDelayedTransition(layout,new AutoTransition());
                 if (v != View.GONE)
                     navBarState(1);
-                for (String s : categoriesList) {
-                    Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
-                }
+                else
+                    navBarState(11);
+
             }
         });
 
@@ -411,6 +413,9 @@ public class MainActivity extends AppCompatActivity {
                 view11.setVisibility(View.VISIBLE);
                 view21.setVisibility(View.GONE);
                 break;
+            case 11:
+                view11.setVisibility(View.GONE);
+                break;
             case 2:
                 view1.setColorFilter(ContextCompat.getColor(this, R.color.white));
                 view2.setColorFilter(ContextCompat.getColor(this, R.color.primary));
@@ -419,6 +424,10 @@ public class MainActivity extends AppCompatActivity {
                 view21.setVisibility(View.VISIBLE);
                 view21.requestFocus();
                 break;
+            case 21:
+                view21.setVisibility(View.GONE);
+                break;
+
 
             default:
 
