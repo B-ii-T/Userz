@@ -1,6 +1,7 @@
 package com.bit.userz;
 
 import android.animation.LayoutTransition;
+import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -25,6 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -65,7 +67,18 @@ public class MainActivity extends AppCompatActivity {
 
         Window window = this.getWindow();
         window.setStatusBarColor(this.getResources().getColor(R.color.black));
+//        findViewById(R.id.userz_logo_text).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Configuration config = new Configuration();
+//                config.fontScale = 3.0f;
+//                getResources().getConfiguration().setTo(config);
+//                Toast.makeText(MainActivity.this, "Font 2xed", Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
 
+        navBarState(0);
         LinearLayout layout =  findViewById(R.id.title_container);
         layout.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
         findViewById(R.id.search_btn).setOnClickListener(new View.OnClickListener() {
@@ -73,7 +86,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 int v = (searchField.getVisibility() == View.GONE)? View.VISIBLE: View.GONE;
                 TransitionManager.beginDelayedTransition(layout,new AutoTransition());
-                searchField.setVisibility(v);
+                if (v != View.GONE)
+                    navBarState(2);
                 }
         });
         findViewById(R.id.sort_category_btn).setOnClickListener(new View.OnClickListener() {
@@ -82,7 +96,8 @@ public class MainActivity extends AppCompatActivity {
                 View vi = findViewById(R.id.categories_recycler);
                 int v = (vi.getVisibility() == View.GONE)? View.VISIBLE: View.GONE;
                 TransitionManager.beginDelayedTransition(layout,new AutoTransition());
-                vi.setVisibility(v);
+                if (v != View.GONE)
+                    navBarState(1);
                 for (String s : categoriesList) {
                     Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
                 }
@@ -186,6 +201,7 @@ public class MainActivity extends AppCompatActivity {
                         searchField.getText().clear();
                     }
                 });
+                navBarState(0);
             }
         });
 
@@ -371,6 +387,44 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         checkActionBar(sh);
+    }
+
+    @SuppressLint("ResourceAsColor")
+    protected void navBarState(int state){
+        ImageView view1 = findViewById(R.id.sort_category_btn);
+        View view11 = findViewById(R.id.categories_recycler);
+        ImageView view2 = findViewById(R.id.search_btn);
+        View view21 = findViewById(R.id.search_field);
+        ImageView view0 = findViewById(R.id.sort_all_btn);
+        switch (state){
+            case 0:
+                view1.setColorFilter(ContextCompat.getColor(this, R.color.white));
+                view2.setColorFilter(ContextCompat.getColor(this, R.color.white));
+                view0.setColorFilter(ContextCompat.getColor(this, R.color.primary));
+                view11.setVisibility(View.GONE);
+                view21.setVisibility(View.GONE);
+                break;
+            case 1:
+                view1.setColorFilter(ContextCompat.getColor(this, R.color.primary));
+                view2.setColorFilter(ContextCompat.getColor(this, R.color.white));
+                view0.setColorFilter(ContextCompat.getColor(this, R.color.white));
+                view11.setVisibility(View.VISIBLE);
+                view21.setVisibility(View.GONE);
+                break;
+            case 2:
+                view1.setColorFilter(ContextCompat.getColor(this, R.color.white));
+                view2.setColorFilter(ContextCompat.getColor(this, R.color.primary));
+                view0.setColorFilter(ContextCompat.getColor(this, R.color.white));
+                view11.setVisibility(View.GONE);
+                view21.setVisibility(View.VISIBLE);
+                view21.requestFocus();
+                break;
+
+            default:
+
+        }
+
+
     }
 
 }
