@@ -19,7 +19,7 @@ import maes.tech.intentanim.CustomIntent;
 
 public class SettingsActivity extends AppCompatActivity {
     private ImageView closeOptionsBtn;
-    private Switch copySwitch, doubleTapSwitch, actionBarSwitch, editModeSwitch;
+    private Switch copySwitch, doubleTapSwitch, actionBarSwitch, editModeSwitch, fingerprintSwitch;
     SharedPreferences settingsPreferences;
     SharedPreferences.Editor editor;
     @Override
@@ -40,17 +40,26 @@ public class SettingsActivity extends AppCompatActivity {
         actionBarSwitch = findViewById(R.id.action_bar_switch);
         closeOptionsBtn = findViewById(R.id.close_options_btn);
         editModeSwitch = findViewById(R.id.edit_mode_switch_option);
+        fingerprintSwitch = findViewById(R.id.fingerprint_switch);
 
         copySwitch.setChecked(settingsPreferences.getBoolean("copyOption", false));
         doubleTapSwitch.setChecked(settingsPreferences.getBoolean("doubleTapOption", false));
         actionBarSwitch.setChecked(settingsPreferences.getBoolean("actionBarOption", false));
         editModeSwitch.setChecked(settingsPreferences.getBoolean("editModeOption", false));
+        fingerprintSwitch.setChecked(settingsPreferences.getBoolean("fingerprintOption", false));
 
         copySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean copyActive) {
                 editor.putBoolean("copyOption", copyActive);
                 editor.commit();
+            }
+        });
+        fingerprintSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean fingerprintEnabled) {
+                    editor.putBoolean("fingerprintOption", fingerprintEnabled);
+                    editor.commit();
             }
         });
         doubleTapSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

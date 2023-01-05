@@ -1,6 +1,7 @@
 package com.bit.userz;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -15,16 +16,14 @@ import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
 
 public class SplashScreen extends AppCompatActivity {
-
+    SharedPreferences sh;
+    static BiometricManager manager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash_screen);
-
-
-
 //        new Handler().postDelayed(new Runnable() {
 //            @Override
 //            public void run() {
@@ -34,7 +33,9 @@ public class SplashScreen extends AppCompatActivity {
 //            }
 //        },1500);
 
-        BiometricManager manager = BiometricManager.from(SplashScreen.this);
+        sh = getSharedPreferences("settingsPreferences", MODE_PRIVATE);
+
+        manager = BiometricManager.from(SplashScreen.this);
         switch (manager.canAuthenticate()){
             case BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE:
                 Toast.makeText(SplashScreen.this, "Biometric authentication not supported", Toast.LENGTH_SHORT).show();
@@ -67,13 +68,21 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                prompt.authenticate(info);
+                if (sh.getBoolean("fingerprintOption", false)){
+                    prompt.authenticate(info);
+                }else{
+                    nextActivity();
+                }
             }
         }, 5500);
         findViewById(R.id.logo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                prompt.authenticate(info);
+                if (sh.getBoolean("fingerprintOption", false)){
+                    prompt.authenticate(info);
+                }else{
+                    nextActivity();
+                }
             }
         });
 
